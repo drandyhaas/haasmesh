@@ -1,0 +1,5 @@
+#!/bin/sh
+if [ "$ACTION" = "pressed" -a "$BUTTON" = "wps" ]; then
+        echo "wps haas" > /tmp/wps_haas
+fi
+return 0

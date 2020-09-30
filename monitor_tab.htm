@@ -1,0 +1,118 @@
+<%+header%>                                                                    
+<h2><%:HaasMesh Monitor%></h2>
+
+<br><p><h3><a href="../system/commands"> Commands page </a></h3></p>
+
+<h3>These are the mesh nodes</h3>
+<button id="buttonNodes" type="button" onclick="myNodes()"> <h5>- Refresh -</h5> </button>
+<p id="nodes">Nodes will go here</p>
+<br>
+<h3>This is the next node I'll go to (Nexthop) when trying to get to each node (Originator)</h3>
+<button id="buttonBatctlo" type="button" onclick="myBatctlo()"> <h5>- Run -</h5> </button>  
+<pre id="batctlo">"Batctl o" output will go here</pre>
+<br>
+<h3>This is a test download of 10 MB</h3>
+<button id="buttonDownload" type="button" onclick="myDownload()"> <h5>- Run -</h5> </button>
+<pre id="download">Test download result here</pre>
+<br>
+<h3>This is the bandwidth (Mb/s) forwards and backwards to and from me to each node</h3>
+<button type="button" onclick="myBandwidth()"> <h5>- Run -</h5> </button>
+<pre id="bandwidth">Bandwidth result here</pre>
+<br>
+<h3>This is the network map</h3>
+<button type="button" onclick="myMap()"> <h5>- Run -</h5> </button>    
+Paste into <a href="https://graphs.grevian.org/graph">here</a>, and choose fdp style
+<pre id="map">Network map result here</pre>
+<br>
+
+<script>
+window.onload = onLoad();
+function onLoad(){
+  myNodes();  
+}
+
+function myNodes() {
+  document.getElementById("nodes").innerHTML="working...";
+  postcmd("/root/script/nodeshtml.sh","nodes");
+}
+function removeNode(n) {
+  if (confirm("Do you really want to forget about node "+n+"?")){
+    postcmd("/root/script/removenode.sh "+n,"nodes");
+    //postcmd("/root/script/nodeshtml.sh","nodes");
+  }
+}
+function myBatctlo() {
+  document.getElementById("batctlo").innerHTML="working...";
+  postcmd("batctl o | sort -n","batctlo");
+}
+function myDownload() {
+  document.getElementById("download").innerHTML="working...";
+  postcmd("/root/script/speed_download.sh","download");
+}
+function myBandwidth() {
+  document.getElementById("bandwidth").innerHTML="working...";
+  postcmd("/root/script/speednodes.sh","bandwidth");
+}
+function myMap() {
+  document.getElementById("map").innerHTML="working...";
+  postcmd("/root/script/fixbattxt.sh","map");
+}
+
+function postcmd(cmd,elem) {
+    (new XHR()).post("<%=luci.dispatcher.build_url("admin", "haas_mesh_tab", "webcmd")%>", {"cmd":cmd}, function(x) {
+        document.getElementById(elem).innerHTML = x.response ;
+    });
+}
+
+</script>
+
+<style>
+.reddot {
+  height: 25px;
+  width: 25px;
+  background-color: #d00;
+  border-radius: 50%;
+  display: inline-block;
+}
+</style>
+
+<style>
+.yellodot {
+  height: 25px;
+  width: 25px;
+  background-color: #dd0;
+  border-radius: 50%;
+  display: inline-block;
+}
+</style>
+
+<style>
+.greendot {
+  height: 25px;
+  width: 25px;
+  background-color: #0d0;
+  border-radius: 50%;
+  display: inline-block;
+}
+</style>
+
+<style>
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+</style>
+
+<%+footer%>
+

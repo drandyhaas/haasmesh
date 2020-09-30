@@ -1,0 +1,7 @@
+# Put your custom commands here that should be executed once
+# the system init finished. By default this file does nothing.
+
+iperf3 -s &
+/root/script/delayedmonstart.sh &
+i2cset -y 2 0x48 3 5 1 0 i # set luma led ring to solid purple dim
+exit 0

@@ -1,0 +1,34 @@
+#!/bin/sh
+
+. /lib/functions.sh
+
+OVERLAY="$( grep ' /overlay ' /proc/mounts )"
+
+case "$ACTION" in
+pressed)
+        [ -z "$OVERLAY" ] && return 0
+        i2cset -y 2 0x48 3 4 1 0 i
+        return 5
+;;
+timeout)
+        . /etc/diag.sh
+        set_state failsafe
+        i2cset -y 2 0x48 3 2 1 0 i
+;;
+released)
+        if [ "$SEEN" -lt 1 ]
+        then
+                echo "REBOOT" > /dev/console
+                sync
+                i2cset -y 2 0x48 3 3 1 0 i
+                reboot
+        elif [ "$SEEN" -ge 5 -a -n "$OVERLAY" ]
+        then
+                echo "FACTORY RESET" > /dev/console
+                i2cset -y 2 0x48 3 1 1 0 i
+                jffs2reset -y && reboot &
+        fi
+;;
+esac
+
+return 0
