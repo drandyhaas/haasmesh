@@ -32,6 +32,11 @@
 <pre id="commandout">Command output here</pre>
 
 <br>
+<h3>These are the tails of all the logs on all the nodes</h3>
+<button type="button" onclick="myLogtails()"> <h5>- Run -</h5> </button>
+<pre id="logtails">Log tails result here</pre>
+
+<br>
 <h3>This is the network map</h3>
 <button type="button" onclick="myMap()"> <h5>- Run -</h5> </button>    
 Paste into <a href="https://graphs.grevian.org/graph">here</a>, and choose fdp style
@@ -87,6 +92,10 @@ function myDownload() {
 function myBandwidth() {
   document.getElementById("bandwidth").innerHTML="working...";
   postcmd("/root/script/speednodes.sh","bandwidth");
+}
+function myLogtails() {
+  document.getElementById("logtails").innerHTML="working...";
+  postcmd("/root/script/logtails.sh","logtails");
 }
 function myMap() {
   document.getElementById("map").innerHTML="working...";
