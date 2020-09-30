@@ -43,6 +43,10 @@ uci set dhcp.lan.leasetime='12h'
 uci set dhcp.lan.ra_management='1'
 uci set dhcp.lan.force='1'
 
+uci set wireless.ap_2g_1.ssid='HaasMeshWifi'
+uci set wireless.ap_5g_1.ssid='HaasMeshWifi'
+uci set wireless.ap_5g_2.ssid='HaasMeshWifi'
+
 fi
 
 if [ $PARENT -eq 2 ]; then
@@ -61,6 +65,10 @@ uci del dhcp.lan.force
 uci del dhcp.lan.ra
 uci del dhcp.lan.dhcpv6
 uci del dhcp.lan.ra_management
+
+uci set wireless.ap_2g_1.ssid='HaasMeshWifi'
+uci set wireless.ap_5g_1.ssid='HaasMeshWifi'
+uci set wireless.ap_5g_2.ssid='HaasMeshWifi'
 
 fi
 
