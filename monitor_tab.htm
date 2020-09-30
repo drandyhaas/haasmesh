@@ -48,19 +48,19 @@ function onLoad(){
 function changenodepass(){
   if (confirm("Do you really want to change the root login password?")){
   document.getElementById("commandout").innerHTML="working...";
-  postcmd("setpasswds.sh "+document.getElementById("nodepass").value,"commandout");
+  postcmd("/root/script/setpasswds.sh "+document.getElementById("nodepass").value,"commandout");
   }
 }
 function changeapssidpass(){
   if (confirm("Do you really want to change the access point SSID and password?")){
   document.getElementById("commandout").innerHTML="working...";
-  postcmd("setapssidpw.sh "+document.getElementById("apssid").value+" "+document.getElementById("appass").value,"commandout");
+  postcmd("/root/script/setapssidpw.sh "+document.getElementById("apssid").value+" "+document.getElementById("appass").value,"commandout");
   }
 }
 function changemeshnamepass(){
   if (confirm("Do you really want to change the hidden mesh name and password?")){
   document.getElementById("commandout").innerHTML="working...";
-  postcmd("setmeshssidpw.sh "+document.getElementById("meshname").value+" "+document.getElementById("meshpass").value,"commandout");
+  postcmd("/root/script/setmeshssidpw.sh "+document.getElementById("meshname").value+" "+document.getElementById("meshpass").value,"commandout");
   }
 }
 
