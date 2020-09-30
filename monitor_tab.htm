@@ -48,25 +48,27 @@ function onLoad(){
 function changenodepass(){
   if (confirm("Do you really want to change the root login password?")){
   document.getElementById("commandout").innerHTML="working...";
-  postcmd("echo "+document.getElementById("nodepass").value,"commandout");
+  postcmd("setpasswds.sh "+document.getElementById("nodepass").value,"commandout");
   }
 }
 function changeapssidpass(){
   if (confirm("Do you really want to change the access point SSID and password?")){
   document.getElementById("commandout").innerHTML="working...";
-  postcmd("echo "+document.getElementById("apssid").value+" "+document.getElementById("appass").value,"commandout");
+  postcmd("setapssidpw.sh "+document.getElementById("apssid").value+" "+document.getElementById("appass").value,"commandout");
   }
 }
 function changemeshnamepass(){
   if (confirm("Do you really want to change the hidden mesh name and password?")){
   document.getElementById("commandout").innerHTML="working...";
-  postcmd("echo "+document.getElementById("meshname").value+" "+document.getElementById("meshpass").value,"commandout");
+  postcmd("setmeshssidpw.sh "+document.getElementById("meshname").value+" "+document.getElementById("meshpass").value,"commandout");
   }
 }
 
 function myNodes() {
   document.getElementById("nodes").innerHTML="working...";
   postcmd("/root/script/nodeshtml.sh","nodes");
+  postcmdval("/root/script/getapssid.sh","apssid");
+  postcmdval("/root/script/getmeshname.sh","meshname");
 }
 function removeNode(n) {
   if (confirm("Do you really want to forget about node "+n+"?")){
@@ -94,6 +96,11 @@ function myMap() {
 function postcmd(cmd,elem) {
     (new XHR()).post("<%=luci.dispatcher.build_url("admin", "haas_mesh_tab", "webcmd")%>", {"cmd":cmd}, function(x) {
         document.getElementById(elem).innerHTML = x.response ;
+    });
+}
+function postcmdval(cmd,elem) {
+    (new XHR()).post("<%=luci.dispatcher.build_url("admin", "haas_mesh_tab", "webcmd")%>", {"cmd":cmd}, function(x) {
+        document.getElementById(elem).value = x.response ;
     });
 }
 
