@@ -4,7 +4,7 @@ echo "looking for parent..."
 
 #first look to see if I get get an IP from a DHCP server (the hub)
 udhcpc -i br-lan -s " " -n -q -R -f -S -t 20 -A 60 &> dhcp.log # wait up to 60s for a lease
-grep obtained dhcp.log
+grep obtained dhcp.log | grep "192\.168\.2\."
 if [ $? -eq 0 ]; then
   PARENT=2 # I'm the child of a local dhcp server, so I'm a node
   myip=`grep obtained dhcp.log | cut -d " " -f 4`
