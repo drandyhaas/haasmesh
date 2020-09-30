@@ -10,7 +10,7 @@ if [ $? -eq 0 ]; then
   myip=`grep obtained dhcp.log | cut -d " " -f 4`
   echo "dhcp gave ip \"${myip}\""
   wget 192.168.2.1/allnodes.txt
-  for i in $(seq 2 17) ; grep -x 192.168.2.$i allnodes.txt > /dev/null ; if [ $? -eq 1 ]; then echo "192.168.2.$i not found "; myip="192.168.2.${i}"; break; fi; done
+  for i in $(seq 2 17) ; do grep -x 192.168.2.$i allnodes.txt > /dev/null ; if [ $? -eq 1 ]; then echo "192.168.2.$i not found "; myip="192.168.2.${i}"; break; fi; done
   echo "based on allnodes.txt, using ip \"${myip}\""
   rm -f allnodes.txt
 else
