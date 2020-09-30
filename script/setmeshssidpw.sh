@@ -6,7 +6,7 @@ if [ `expr length $2` -lt 8 ]; then echo "pw too short - has to be at least 8 ch
 if [ `/root/script/myip.sh | cut -f 4 -d . ` -eq 1 ]; then
 echo "master hub"
 
-#for n in 48; do n="192.168.2.$n"
+#for n in 19; do n="192.168.2.$n"
 for n in `/root/script/nodes.sh`; do
    echo "Setting mesh ssid to \"${1}\" and pw to \"${2}\" for node $n "
    ssh $n "uci set wireless.mesh0.mesh_id=\"${1}\"; uci set wireless.mesh0.key=\"${2}\"; uci commit; /root/script/wifi30s.sh &"
