@@ -3,9 +3,9 @@ nodes=`/root/script/nodes.sh`
 
 #the db of nodes is only kept on the hub
 if [ `echo $myip | cut -f 4 -d . ` -eq 1 ]; then 
-  allnodes=`cat /www/allnodes.txt`
+  allnodes=`cat /www/allnodes.txt | sort`
 else
-  allnodes=$nodes
+  allnodes=`echo $nodes | sort`
 fi
 
 pings=`for i in $allnodes ; do echo $i; /root/script/pingip.sh $i ; done | grep seq=0`
