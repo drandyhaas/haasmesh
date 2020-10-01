@@ -6,14 +6,17 @@ echo "looking for parent..."
 udhcpc -i br-lan -s " " -n -q -R -f -S -t 20 -A 60 &> dhcp.log # wait up to 60s for a lease
 grep obtained dhcp.log | grep "192\.168\.2\."
 if [ $? -eq 0 ]; then
-  PARENT=2 # I'm the child of a local dhcp server, so I'm a node
   myip=`grep obtained dhcp.log | cut -d " " -f 4`
   echo "dhcp gave ip \"${myip}\""
   wget 192.168.2.1/allnodes.txt
-  for i in $(seq 2 17) ; do grep -x 192.168.2.$i allnodes.txt > /dev/null ; if [ $? -eq 1 ]; then echo "192.168.2.$i not found "; myip="192.168.2.${i}"; break; fi; done
-  echo "based on allnodes.txt, using ip \"${myip}\""
-  rm -f allnodes.txt
-else
+  if [ -f allnodes.txt ]; then
+    PARENT=2 # I'm the child of a local dhcp server, so I'm a node
+    for i in $(seq 2 17) ; do grep -x 192.168.2.$i allnodes.txt > /dev/null ; if [ $? -eq 1 ]; then echo "192.168.2.$i not found "; myip="192.168.2.${i}"; break; fi; done
+    echo "based on allnodes.txt, using ip \"${myip}\""
+    rm -f allnodes.txt
+  fi
+fi
+if [ $PARENT -eq 0 ]; then
   #if we can't get a local IP from DHCP, then maybe we're a hub
   #see if we have an address on WAN interface, like we're plugged into a router/modem
 
@@ -77,11 +80,13 @@ done # looping until we find a parent
 echo "committing changes and restarting iface"
 uci changes
 uci commit
-if [ $PARENT -eq 1 ]; then
-  i2cset -y 2 0x48 5 5 5 0 i #for luma, spinning purple
-  reboot # seem to need this, to get default routes working, restart dhcp server, etc
-fi
+#if [ $PARENT -eq 1 ]; then
+#  i2cset -y 2 0x48 5 5 5 0 i #for luma, spinning purple
+#  reboot # seem to need this, to get default routes working, restart dhcp server, etc
+#fi
 /etc/init.d/network reload
-#wifi reload
+wifi reload
+/etc/init.d/odhcpd restart
+/etc/init.d/dnsmasq restart
 echo "done finding parent"
 ash /etc/rc.local # restart some stuff
