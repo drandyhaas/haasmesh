@@ -86,7 +86,7 @@ uci set network.bat_eth.macaddr="00:${batethmac}"
 echo "committing changes and restarting iface"
 uci changes
 uci commit
-i2cset -y 2 0x48 3 4 2 0 i #for luma, dim solid green
+i2cset -y 2 0x48 3 4 2 0 i #for luma, dim solid blue
 /etc/init.d/network reload
 wifi reload
 /etc/init.d/odhcpd restart
