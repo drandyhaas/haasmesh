@@ -3,6 +3,7 @@ nodes=`/root/script/nodes.sh`
 
 #the db of nodes is only kept on the hub
 if [ `echo $myip | cut -f 4 -d . ` -eq 1 ]; then 
+  /root/script/allnodes.sh # remake the file (also done in bathosts.sh periodically)
   allnodes=`cat /www/allnodes.txt | sort`
 else
   allnodes=`echo $nodes | sort`
