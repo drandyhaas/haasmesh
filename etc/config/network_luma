@@ -48,3 +48,13 @@ config interface 'wan6'
         option ifname 'eth1'
         option proto 'dhcpv6'
 
+config device
+        option name eth2
+        option mtu 1600
+
+config interface 'bat_eth2'
+        option mtu '1600'
+        option proto 'batadv_hardif'
+        option master 'bat0'
+        option ifname 'eth2'
+
