@@ -11,7 +11,7 @@ fi
 
 pings=`for i in $allnodes ; do echo $i; /root/script/pingip.sh $i ; done | grep seq=0`
 
-echo "<table><tr> <th><h3>Node IP</h3></th> <th><h3>Monitor active</h3></th> <th><h3>Ping active</h3></th> </tr>"
+echo "<table><tr> <th><h3>Node IP</h3></th> <th><h3>Mesh</h3></th> <th><h3>Ping</h3></th> </tr>"
 for n in $allnodes; do
   echo "<tr><th>"
   if [ "$n" == "$myip" ]; then 
@@ -20,9 +20,11 @@ for n in $allnodes; do
    echo "<h4><a href=\"http://${n}\" rel=\"noopener noreferrer\" target=\"_blank\">$n</a></h4>"
   fi
 
+  nn=`echo $n | cut -f 4 -d .`
+
   echo "</th><th>"
   echo "${nodes}" | grep -x $n >/dev/null
-  if [ $? -eq 1 ]; then echo "<span class="reddot"></span>"; 
+  if [ $? -eq 1 ]; then echo "<span class="reddot" onclick=\"removeNode(${nn})\"></span>"; 
   else echo "<span class="greendot"></span>"; fi
 
   echo "</th><th>"
@@ -30,10 +32,7 @@ for n in $allnodes; do
   if [ $? -eq 1 ]; then echo "<span class="reddot"></span>";
   else echo "<span class="greendot"></span>"; fi
 
-  echo "</th><th>"
-  nn=`echo $n | cut -f 4 -d .`
-  echo "<button type=\"button\" onclick=\"removeNode(${nn})\"> <h5>- Remove -</h5> </button>"
-
   echo "</th></tr>"
 done
 echo "</table>"
+echo "Click on a red mesh dot to remove the node from the list"

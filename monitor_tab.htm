@@ -1,7 +1,7 @@
 <%+header%>                                                                    
-<h2><%:HaasMesh Monitor%></h2>
-
-<br><p><h3><a href="../system/commands"> Commands page </a></h3></p>
+<h2><%:Maxwell HaasMesh Monitor%></h2>
+<br>
+<!-- <p><h3><a href="../system/commands"> Commands page </a></h3></p> -->
 
 <h3>These are the mesh nodes</h3>
 <button id="buttonNodes" type="button" onclick="myNodes()"> <h5>- Refresh -</h5> </button>
@@ -95,7 +95,7 @@ function myBandwidth() {
 }
 function myLogtails() {
   document.getElementById("logtails").innerHTML="working...";
-  postcmd("/root/script/logtails.sh","logtails");
+  postcmd("/root/script/foreachnode.sh \"logread|tail\" ","logtails");
 }
 function myMap() {
   document.getElementById("map").innerHTML="working...";
