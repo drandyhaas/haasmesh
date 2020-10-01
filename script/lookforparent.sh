@@ -1,6 +1,7 @@
 PARENT=0
 while [ $PARENT == 0 ]; do
 echo "looking for parent..."
+i2cset -y 2 0x48 5 5 5 0 i #for luma, spinning purple
 
 #first look to see if I get get an IP from a DHCP server (the hub)
 udhcpc -i br-lan -s " " -n -q -R -f -S -t 20 -A 60 &> dhcp.log # wait up to 60s for a lease
@@ -77,16 +78,19 @@ fi
 
 #if [ $PARENT -eq 0 ]; then exit; fi
 done # looping until we find a parent
+
+echo "fixing backhaul mac address" # to stop "received packet on bat0 with own address as source address" warnings
+batethmac=`ifconfig | grep HW | grep \`uci get network.bat_eth.ifname\` |cut -d ":" -f 3-|sed 's% %%g'`
+uci set network.bat_eth.macaddr="00:${batethmac}"
+
 echo "committing changes and restarting iface"
 uci changes
 uci commit
-#if [ $PARENT -eq 1 ]; then
-#  i2cset -y 2 0x48 5 5 5 0 i #for luma, spinning purple
-#  reboot # seem to need this, to get default routes working, restart dhcp server, etc
-#fi
+i2cset -y 2 0x48 3 4 2 0 i #for luma, dim solid green
 /etc/init.d/network reload
 wifi reload
 /etc/init.d/odhcpd restart
 /etc/init.d/dnsmasq restart
 echo "done finding parent"
+i2cset -y 2 0x48 3 5 2 0 i #for luma, dim solid purple
 ash /etc/rc.local # restart some stuff
