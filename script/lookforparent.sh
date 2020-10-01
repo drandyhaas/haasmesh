@@ -78,6 +78,7 @@ echo "committing changes and restarting iface"
 uci changes
 uci commit
 if [ $PARENT -eq 1 ]; then
+  i2cset -y 2 0x48 5 5 5 0 i #for luma, spinning purple
   reboot # seem to need this, to get default routes working, restart dhcp server, etc
 fi
 /etc/init.d/network reload
