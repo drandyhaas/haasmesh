@@ -16,9 +16,9 @@ if [ $? -eq 0 ]; then
 else
   #if we can't get a local IP from DHCP, then maybe we're a hub
   #see if we have an address on WAN interface, like we're plugged into a router/modem
-  
+
   ifconfig |grep -v Scope |grep -v 192.168.2. | grep -v 127.0.0.1 | grep -c inet > Nips.txt
-  if [ `cat Nips.txt` != 0 ]; then 
+  if [ `cat Nips.txt` != 0 ]; then
     PARENT=1
   fi
   rm Nips.txt
@@ -77,6 +77,9 @@ done # looping until we find a parent
 echo "committing changes and restarting iface"
 uci changes
 uci commit
+if [ $PARENT -eq 1 ]; then
+  reboot # seem to need this, to get default routes working, restart dhcp server, etc
+fi
 /etc/init.d/network reload
 #wifi reload
 echo "done finding parent"
