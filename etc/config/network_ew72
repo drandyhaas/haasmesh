@@ -44,7 +44,7 @@ config device
         option name eth0
         option mtu 1600
 
-config interface 'bat_eth0'
+config interface 'bat_eth'
         option mtu '1600'
         option proto 'batadv_hardif'
         option master 'bat0'
