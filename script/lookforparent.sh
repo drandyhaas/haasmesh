@@ -14,6 +14,7 @@ if [ $? -eq 0 ]; then
     PARENT=2 # I'm the child of a local dhcp server, so I'm a node
     for i in $(seq 2 17) ; do grep -x 192.168.2.$i allnodes.txt > /dev/null ; if [ $? -eq 1 ]; then echo "192.168.2.$i not found "; myip="192.168.2.${i}"; break; fi; done
     echo "based on allnodes.txt, using ip \"${myip}\""
+    wget -O - "http://192.168.2.1/cgi-bin/newhaasnode?newhaasnodeip=${myip}&extra=0" # tell the server about me
     rm -f allnodes.txt
   fi
 fi

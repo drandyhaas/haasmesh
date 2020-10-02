@@ -1,10 +1,10 @@
 #!/bin/sh
 echo "Content-type: text/html"
 echo ""
-echo "Sample CGI Output"
+echo "NewHaasNode CGI Output"
 echo ""
 echo "<pre>"
-env
+#env
 echo
 
 extra=$(echo "$QUERY_STRING" | sed -n 's/^.*extra=\([^&]*\).*$/\1/p' | sed "s/%20/ /g")
