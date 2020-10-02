@@ -4,7 +4,7 @@ echo "looking for parent..."
 i2cset -y 2 0x48 5 5 5 0 i #for luma, spinning purple
 
 #first look to see if I get get an IP from a DHCP server (the hub)
-udhcpc -i br-lan -s " " -n -q -R -f -S -t 20 -A 60 &> dhcp.log # wait up to 60s for a lease
+udhcpc -i br-lan -s " " -n -q -R -f -S -t 20 -A 10 &> dhcp.log # wait up to 10s for a lease
 grep obtained dhcp.log | grep "192\.168\.2\."
 if [ $? -eq 0 ]; then
   myip=`grep obtained dhcp.log | cut -d " " -f 4`
