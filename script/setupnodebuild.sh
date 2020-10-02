@@ -8,3 +8,4 @@ mkdir -p files/usr/lib/lua/luci/controller/myapp; cp haasmesh/haas_mesh_tab.lua 
 mkdir -p files/usr/lib/lua/luci/view/myapp; cp haasmesh/monitor_tab.htm files/usr/lib/lua/luci/view/myapp/
 mkdir -p files/etc/rc.button; cp haasmesh/etc/rc.button/reset haasmesh/etc/rc.button/wps files/etc/rc.button/
 mkdir -p files/etc/hotplug.d/button; cp haasmesh/etc/hotplug.d/button/buttons files/etc/hotplug.d/button/
+cp haasmesh/newhaasnode files/www/cgi-bin/

@@ -1,0 +1,29 @@
+#!/bin/sh
+echo "Content-type: text/html"
+echo ""
+echo "Sample CGI Output"
+echo ""
+echo "<pre>"
+env
+echo
+
+extra=$(echo "$QUERY_STRING" | sed -n 's/^.*extra=\([^&]*\).*$/\1/p' | sed "s/%20/ /g")
+echo "extra is $extra "
+newhaasnodeip=$(echo "$QUERY_STRING" | sed -n 's/^.*newhaasnodeip=\([^&]*\).*$/\1/p' | sed "s/%20/ /g")
+echo "newhaasnodeip is $newhaasnodeip "
+echo
+
+#make /www/allnodes.txt
+myip=`/root/script/myip.sh`
+newnode="192.168.2.${newhaasnodeip}"
+#the db of nodes is only kept on the hub
+if [ `echo $myip | cut -f 4 -d . ` -eq 1 ]; then
+  touch /www/allnodes.txt
+  grep -x $newnode /www/allnodes.txt >/dev/null
+  if [ $? -eq 1 ]; then echo $newnode >> /www/allnodes.txt; fi
+  cat /www/allnodes.txt
+fi
+
+echo "</pre>"
+echo ""
+

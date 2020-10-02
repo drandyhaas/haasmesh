@@ -6,5 +6,6 @@ mkdir -p /usr/lib/lua/luci/controller/myapp; cp haasmesh/haas_mesh_tab.lua /usr/
 mkdir -p /usr/lib/lua/luci/view/myapp; cp haasmesh/monitor_tab.htm /usr/lib/lua/luci/view/myapp/
 cp haasmesh/etc/rc.button/reset haasmesh/etc/rc.button/wps /etc/rc.button/
 mkdir -p /etc/hotplug.d/button; cp haasmesh/etc/hotplug.d/button/buttons /etc/hotplug.d/button/
+cp haasmesh/newhaasnode /www/cgi-bin/
 cd -
 ash script/monstart.sh
