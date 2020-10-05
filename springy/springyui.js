@@ -214,13 +214,13 @@ jQuery.fn.springy = function(params) {
 			}
 
 			//change default to  10.0 to allow text fit between edges
-			var spacing = 12.0;
+			var spacing = 18.0;
 
 			// Figure out how far off center the line should be drawn
 			var offset = normal.multiply(-((total - 1) * spacing)/2.0 + (n * spacing));
 
-			var paddingX = 6;
-			var paddingY = 6;
+			var paddingX = 10;
+			var paddingY = 10;
 
 			var s1 = toScreen(p1).add(offset);
 			var s2 = toScreen(p2).add(offset);
@@ -242,8 +242,8 @@ jQuery.fn.springy = function(params) {
 			var weight = (edge.data.weight !== undefined) ? edge.data.weight : 1.0;
 
 			ctx.lineWidth = Math.max(weight *  2, 0.1);
-			arrowWidth = 1 + ctx.lineWidth;
-			arrowLength = 8;
+			arrowWidth = 4 + ctx.lineWidth;
+			arrowLength = 18;
 
 			var directional = (edge.data.directional !== undefined) ? edge.data.directional : true;
 
@@ -286,9 +286,9 @@ jQuery.fn.springy = function(params) {
 				ctx.font = (edge.data.font !== undefined) ? edge.data.font : edgeFont;
 				ctx.fillStyle = stroke;
 				var angle = Math.atan2(s2.y - s1.y, s2.x - s1.x);
-				var displacement = -8;
+				var displacement = -11;
 				if (edgeLabelsUpright && (angle > Math.PI/2 || angle < -Math.PI/2)) {
-					displacement = 8;
+					displacement = 11;
 					angle += Math.PI;
 				}
 				var textPos = s1.add(s2).divide(2).add(normal.multiply(displacement));

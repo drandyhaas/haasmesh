@@ -32,7 +32,14 @@ for (r = 0; r < obj.vis.length; r++) {
       var nnode = graph.newNode({label: name2, color: '#00F000', font: '16px Verdana, sans-serif'});
       nodemap[name2]=nnode
     }
-    var nedge = graph.newEdge(rnode, nnode, {label: 'edge', color: '#00A0B0', directional: 1, weight: 2, font: '10px Verdana, sans-serif'});
+    var ename = "edge"
+    var eweight = 3.0
+    if (obj.vis[r].neighbors[n].metric!=undefined){
+      ename = obj.vis[r].neighbors[n].metric
+      eweight = eweight/(1.0 + 300.*(parseFloat(ename)-1.0))
+      ename = eweight.toPrecision(3)
+    }
+    var nedge = graph.newEdge(rnode, nnode, {label: ename, color: '#00A0B0', directional: 1, weight: eweight.toString(), font: '10px Verdana, sans-serif'});
 
   }
 
