@@ -21,4 +21,6 @@ done < /tmp/dhcp.leases
 sed -e 's%$%\ \\%' -i /root/bat.txt # add a \ at the end of each line
 echo -n "var txt = '"; cat /root/bat.txt; echo "'" # add the surrounding var text
 
+echo -n "var txt2 = '"; echo -n `alfred -r 69`; echo "'" # the wifi strengths
+
 rm /root/bat.txt

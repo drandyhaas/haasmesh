@@ -1,5 +1,25 @@
 
 
+txt2 = txt2.slice(0, -1)
+txt2=txt2.replaceAll('",' , '":')
+txt2=txt2.replaceAll('\x0a','|')
+txt2='{ "vis2" : [  ' +txt2+ ' ] }'
+console.log(txt2)
+var obj2 = JSON.parse(txt2)
+console.log("Num nodes reporting: "+ obj2.vis2.length )
+for (x in obj2.vis2) {
+  for (y in obj2.vis2[x]) {
+    console.log("Node mac: "+ y)
+    res=obj2.vis2[x][y].slice(0, -1).split("|")
+    console.log("Node connections: "+ res )
+    for (i in res){
+      if (res[i]!=undefined){ 
+        ress = res[i].split(" ")
+        console.log("Enpoint mac / strength dBm: "+ress[0]+" / "+ress[1])  
+      }
+    }
+  }
+}
 
 var obj = JSON.parse(txt);
 nodemap={}
