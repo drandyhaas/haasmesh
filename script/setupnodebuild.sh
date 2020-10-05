@@ -9,3 +9,6 @@ mkdir -p files/usr/lib/lua/luci/view/myapp; cp haasmesh/monitor_tab.htm files/us
 mkdir -p files/etc/rc.button; cp haasmesh/etc/rc.button/reset haasmesh/etc/rc.button/wps files/etc/rc.button/
 mkdir -p files/etc/hotplug.d/button; cp haasmesh/etc/hotplug.d/button/buttons files/etc/hotplug.d/button/
 mkdir -p files/www/cgi-bin; cp haasmesh/newhaasnode files/www/cgi-bin/
+cp -r haasmesh/springy files/www/
+cp -r haasmesh/node_modules files/www/
+cp haasmesh/dotbottom.html haasmesh/dottop.html files/www/
