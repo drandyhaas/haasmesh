@@ -1,5 +1,5 @@
 
-batadv-vis | sed s%TT%1.000% > /root/bat.txt
+batadv-vis | cut -d '[' -f 1 > /root/bat.txt
 
 /root/script/bathosts.sh
 
@@ -17,5 +17,5 @@ while read p; do
   sed -i "s%$mac%$ip%gi" /root/bat.txt
 done < /tmp/dhcp.leases
 
-cat /root/bat.txt | sed "s%\[label=\"1.000\"\]%%g"
+cat /root/bat.txt # | sed s%\".-192%\"192%g 
 rm /root/bat.txt
