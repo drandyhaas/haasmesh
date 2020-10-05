@@ -8,6 +8,7 @@ cp haasmesh/etc/rc.button/reset haasmesh/etc/rc.button/wps /etc/rc.button/
 mkdir -p /etc/hotplug.d/button; cp haasmesh/etc/hotplug.d/button/buttons /etc/hotplug.d/button/
 cp haasmesh/newhaasnode /www/cgi-bin/
 cp -r haasmesh/springy /www/
+cp -r haasmesh/node_modules /www/
 cp dotbottom.html dottop.html /www/
 cd -
 ash script/monstart.sh
