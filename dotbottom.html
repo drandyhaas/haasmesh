@@ -1,0 +1,21 @@
+
+        `;
+
+        // Asynchronous call to layout
+//        hpccWasm.graphviz.layout(dot, "svg", "fdp").then(svg => {
+//            const div = document.getElementById("placeholder");
+//            div.innerHTML = svg;
+//        });
+
+        hpccWasm.graphvizSync().then(graphviz => {
+            const div = document.getElementById("placeholder2");
+            // Synchronous call to layout
+            div.innerHTML = graphviz.layout(dot, "svg", "fdp");
+        });
+
+    </script>
+
+</body>
+
+</html>
+

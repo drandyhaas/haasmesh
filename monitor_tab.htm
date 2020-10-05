@@ -39,8 +39,8 @@
 <br>
 <h3>This is the network map</h3>
 <button type="button" onclick="myMap()"> <h5>- Run -</h5> </button>    
-Paste into <a href="https://graphs.grevian.org/graph">here</a>, and choose fdp style
-<pre id="map">Network map result here</pre>
+<!-- Paste into <a href="https://graphs.grevian.org/graph">here</a>, and choose fdp style -->
+<p id="map">Network map link result here</pre>
 
 <br>
 
@@ -99,7 +99,7 @@ function myLogtails() {
 }
 function myMap() {
   document.getElementById("map").innerHTML="working...";
-  postcmd("/root/script/fixbattxt.sh","map");
+  postcmd("/root/script/makebatmap.sh","map");
 }
 
 function postcmd(cmd,elem) {
