@@ -7,6 +7,9 @@ var r;
 for (r = 0; r < obj.vis.length; r++) {
 
   var name = obj.vis[r].primary
+  if (name.indexOf(" ")>-1){
+    name = name.slice(name.indexOf(" ")+1);
+  }
   if (name.indexOf("-192.168.")>-1){
     name = name.slice(name.indexOf("-192.168.")+1);
   }
@@ -24,6 +27,9 @@ for (r = 0; r < obj.vis.length; r++) {
   var n;
   for (n = 0; n < obj.vis[r].neighbors.length; n++) {
     var name2 = obj.vis[r].neighbors[n].neighbor
+    if (name2.indexOf(" ")>-1){
+      name2 = name2.slice(name2.indexOf(" ")+1);
+    }
     if (name2.indexOf("-192.168.")>-1){
       name2 = name2.slice(name2.indexOf("-192.168.")+1);
     }
@@ -46,6 +52,9 @@ for (r = 0; r < obj.vis.length; r++) {
   var c;
   for (c = 0; c < obj.vis[r].clients.length; c++) {
     var name3 = obj.vis[r].clients[c]
+    if (name3.indexOf(" ")>-1){
+      name3 = name3.slice(name3.indexOf(" ")+1);
+    }
     if (name3.indexOf("-192.168.")>-1){
       name3 = name3.slice(name3.indexOf("-192.168.")+1);
     }
