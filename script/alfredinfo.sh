@@ -7,6 +7,8 @@ while true; do
   iwinfo mesh0 assoclist 2>&1 | grep SNR | grep dBm | cut -d / -f 1 | alfred -s 67
   iwinfo wlan1 assoclist 2>&1 | grep SNR | grep dBm | cut -d / -f 1 | alfred -s 68
   iwinfo wlan2 assoclist 2>&1 | grep SNR | grep dBm | cut -d / -f 1 | alfred -s 69
+  iwinfo | grep ESSID | alfred -s 70
+  iwinfo | grep Channel | alfred -s 71
  else
   /root/script/monstart.sh
  fi
