@@ -1,5 +1,6 @@
 
-
+function parsealfwifitxt(txt2){
+strengthmap={}
 txt2 = txt2.slice(0, -1)
 txt2=txt2.replaceAll('",' , '":')
 txt2=txt2.replaceAll('\x0a','|')
@@ -15,11 +16,18 @@ for (x in obj2.vis2) {
     for (i in res){
       if (res[i]!=undefined){ 
         ress = res[i].split(" ")
-        console.log("Enpoint mac / strength dBm: "+ress[0]+" / "+ress[1])  
+        console.log("Enpoint mac / strength dBm: "+ress[0]+" / "+ress[1])
+        strengthmap[ress[0].toUpperCase()]=ress[1]
       }
     }
   }
 }
+return strengthmap;
+}
+
+strengthmap67=parsealfwifitxt(txt67)
+strengthmap68=parsealfwifitxt(txt68)
+strengthmap69=parsealfwifitxt(txt69)
 
 var obj = JSON.parse(txt);
 nodemap={}
@@ -59,11 +67,11 @@ for (r = 0; r < obj.vis.length; r++) {
       nodemap[name2]=nnode
     }
     var ename = "edge"
-    var eweight = 3.0
+    var eweight = 3.33333
     if (obj.vis[r].neighbors[n].metric!=undefined){
       ename = obj.vis[r].neighbors[n].metric
       eweight = eweight/(1.0 + 300.*(parseFloat(ename)-1.0))
-      ename = eweight.toPrecision(3)
+      ename = (30.0*eweight).toFixed(0)
     }
     var nedge = graph.newEdge(rnode, nnode, {label: ename, color: '#00A0B0', directional: 1, weight: eweight.toString(), font: '10px Verdana, sans-serif'});
 
@@ -72,7 +80,10 @@ for (r = 0; r < obj.vis.length; r++) {
   var c;
   for (c = 0; c < obj.vis[r].clients.length; c++) {
     var name3 = obj.vis[r].clients[c]
+    macclient=""
     if (name3.indexOf(" ")>-1){
+      macclient = name3.slice(0,name3.indexOf(" ")).toUpperCase()
+      //console.log("macclient: "+macclient)
       name3 = name3.slice(name3.indexOf(" ")+1);
     }
     if (name3.indexOf("-192.168.")>-1){
@@ -83,7 +94,18 @@ for (r = 0; r < obj.vis.length; r++) {
       var cnode = graph.newNode({label: name3.replace(" ","\n"), color: '#0000F0', font: '16px Verdana, sans-serif'});
       nodemap[name3]=cnode
     }
-    var nedge = graph.newEdge(rnode, cnode, {label: 'edge', color: '#A00000', directional: 1, weight: 1, font: '10px Verdana, sans-serif'});
+    var ename = "edge"
+    var eweight = 1.0
+    if (strengthmap67[macclient]!=undefined){
+      ename = "mesh: "+strengthmap67[macclient]+" dBm"
+    }
+    if (strengthmap68[macclient]!=undefined){
+      ename = "2G: "+strengthmap68[macclient]+" dBm"
+    }
+    if (strengthmap69[macclient]!=undefined){
+      ename = "5G: "+strengthmap69[macclient]+" dBm"
+    }
+    var nedge = graph.newEdge(rnode, cnode, {label: ename, color: '#A00000', directional: 1, weight: 1, font: '10px Verdana, sans-serif'});
 
   }
 
