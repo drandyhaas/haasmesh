@@ -1,6 +1,20 @@
 
 
 
+var obj = JSON.parse(txt);
+
+var r;
+for (r = 0; r < obj.vis.length; r++) {
+  var rnode = graph.newNode({label: obj.vis[r].primary, color: '#000000', font: '26px Verdana, sans-serif', ondoubleclick: function() { console.log("Hello!"); } });
+  var n;
+  for (n = 0; n < obj.vis[r].neighbors.length; n++) {
+    var nnode = graph.newNode({label: obj.vis[r].neighbors[n].neighbor, color: '#0000F0', font: '16px Verdana, sans-serif'});
+    var nedge = graph.newEdge(rnode, nnode, {label: 'edge', color: '#00A0B0', directional: 1, weight: 2, font: '10px Verdana, sans-serif'});
+
+  }
+  break;
+}
+
 jQuery(function(){
   var springy = window.springy = jQuery('#springydemo').springy({
     graph: graph,

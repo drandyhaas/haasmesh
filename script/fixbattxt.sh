@@ -1,5 +1,5 @@
 
-batadv-vis > /root/bat.txt
+batadv-vis -f jsondoc > /root/bat.txt
 
 /root/script/bathosts.sh
 
@@ -17,5 +17,6 @@ while read p; do
   sed -i "s%$mac%$ip%gi" /root/bat.txt
 done < /tmp/dhcp.leases
 
-cat /root/bat.txt # | sed s%\".-192%\"192%g 
+sed -e 's%$%\ \\%' -i /root/bat.txt
+echo -n "var txt = '"; cat /root/bat.txt; echo "'" 
 rm /root/bat.txt
