@@ -1,5 +1,5 @@
 
-batadv-vis | cut -d '[' -f 1 > /root/bat.txt
+batadv-vis > /root/bat.txt
 
 /root/script/bathosts.sh
 
