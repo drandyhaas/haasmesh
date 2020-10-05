@@ -2,17 +2,55 @@
 
 
 var obj = JSON.parse(txt);
-
+nodemap={}
 var r;
 for (r = 0; r < obj.vis.length; r++) {
-  var rnode = graph.newNode({label: obj.vis[r].primary, color: '#000000', font: '26px Verdana, sans-serif', ondoubleclick: function() { console.log("Hello!"); } });
+
+  var name = obj.vis[r].primary
+  if (name.indexOf("-192.168.")>-1){
+    name = name.slice(name.indexOf("-192.168.")+1);
+  }
+  var rnode = nodemap[name]
+  if (rnode==undefined){
+    rnode = graph.newNode({label: name, color: '#000000', font: '16px Verdana, sans-serif', ondoubleclick: function() { console.log("Hello!"); } });
+    nodemap[name]=rnode
+  }
+  else{
+    rnode.data.color= '#000000'
+    rnode.data.font= '16px Verdana, sans-serif'
+    rnode.data.ondoubleclick= function() { console.log("Hello "+rnode.data.label+" !"); }
+  }
+
   var n;
   for (n = 0; n < obj.vis[r].neighbors.length; n++) {
-    var nnode = graph.newNode({label: obj.vis[r].neighbors[n].neighbor, color: '#0000F0', font: '16px Verdana, sans-serif'});
+    var name2 = obj.vis[r].neighbors[n].neighbor
+    if (name2.indexOf("-192.168.")>-1){
+      name2 = name2.slice(name2.indexOf("-192.168.")+1);
+    }
+    var nnode = nodemap[name2]
+    if (nnode==undefined){
+      var nnode = graph.newNode({label: name2, color: '#00F000', font: '16px Verdana, sans-serif'});
+      nodemap[name2]=nnode
+    }
     var nedge = graph.newEdge(rnode, nnode, {label: 'edge', color: '#00A0B0', directional: 1, weight: 2, font: '10px Verdana, sans-serif'});
 
   }
-  break;
+
+  var c;
+  for (c = 0; c < obj.vis[r].clients.length; c++) {
+    var name3 = obj.vis[r].clients[c]
+    if (name3.indexOf("-192.168.")>-1){
+      name3 = name3.slice(name3.indexOf("-192.168.")+1);
+    }
+    var cnode = nodemap[name3]
+    if (cnode==undefined){
+      var cnode = graph.newNode({label: name3.replace(" ","\n"), color: '#0000F0', font: '16px Verdana, sans-serif'});
+      nodemap[name3]=cnode
+    }
+    var nedge = graph.newEdge(rnode, cnode, {label: 'edge', color: '#A00000', directional: 1, weight: 1, font: '10px Verdana, sans-serif'});
+
+  }
+
 }
 
 jQuery(function(){
