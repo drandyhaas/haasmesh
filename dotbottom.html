@@ -1,33 +1,35 @@
+haasdebug=0
 
-function parsealfwifitxt(txt2){
 strengthmap={}
 txt2 = txt2.slice(0, -1)
 txt2=txt2.replaceAll('",' , '":')
 txt2=txt2.replaceAll('\x0a','|')
 txt2='{ "vis2" : [  ' +txt2+ ' ] }'
-console.log(txt2)
+if (haasdebug) console.log(txt2)
 var obj2 = JSON.parse(txt2)
-console.log("Num nodes reporting: "+ obj2.vis2.length )
+if (haasdebug) console.log("Num nodes reporting: "+ obj2.vis2.length )
 for (x in obj2.vis2) {
   for (y in obj2.vis2[x]) {
-    console.log("Node mac: "+ y)
+    if (haasdebug) console.log("Node mac: "+ y)
     res=obj2.vis2[x][y].slice(0, -1).split("|")
-    console.log("Node connections: "+ res )
+    if (haasdebug) console.log("Node connections: "+ res )
     for (i in res){
       if (res[i]!=undefined){ 
-        ress = res[i].split(" ")
-        console.log("Enpoint mac / strength dBm: "+ress[0]+" / "+ress[1])
-        strengthmap[ress[0].toUpperCase()]=ress[1]
+        rese=res[i].split(" = ")
+        if (haasdebug) console.log("rese[0]: "+rese[0])
+        if (haasdebug) console.log("rese[1]: "+rese[1])
+        chan=rese[1].split(": ")[2]
+        if (haasdebug) console.log("chan: "+chan)
+        if (haasdebug) console.log("rese[2]: "+rese[2])
+        ress = rese[2].split(" ")
+        for (r=0; r<ress.length; r+=3){
+          if (haasdebug) console.log("Enpoint mac / strength dBm: "+ress[r+0]+" / "+ress[r+1])
+          strengthmap[ress[r+0].toUpperCase()]={strength: ress[r+1], chan: chan}
+        }
       }
     }
   }
 }
-return strengthmap;
-}
-
-strengthmap67=parsealfwifitxt(txt67)
-strengthmap68=parsealfwifitxt(txt68)
-strengthmap69=parsealfwifitxt(txt69)
 
 var obj = JSON.parse(txt);
 nodemap={}
@@ -83,7 +85,7 @@ for (r = 0; r < obj.vis.length; r++) {
     macclient=""
     if (name3.indexOf(" ")>-1){
       macclient = name3.slice(0,name3.indexOf(" ")).toUpperCase()
-      //console.log("macclient: "+macclient)
+      if (haasdebug) console.log("macclient: "+macclient)
       name3 = name3.slice(name3.indexOf(" ")+1);
     }
     if (name3.indexOf("-192.168.")>-1){
@@ -94,16 +96,11 @@ for (r = 0; r < obj.vis.length; r++) {
       var cnode = graph.newNode({label: name3.replace(" ","\n"), color: '#0000F0', font: '16px Verdana, sans-serif'});
       nodemap[name3]=cnode
     }
-    var ename = "edge"
+    var ename = "LAN"
     var eweight = 1.0
-    if (strengthmap67[macclient]!=undefined){
-      ename = "mesh: "+strengthmap67[macclient]+" dBm"
-    }
-    if (strengthmap68[macclient]!=undefined){
-      ename = "2G: "+strengthmap68[macclient]+" dBm"
-    }
-    if (strengthmap69[macclient]!=undefined){
-      ename = "5G: "+strengthmap69[macclient]+" dBm"
+    if (strengthmap[macclient]!=undefined){
+      ename = "Ch"+strengthmap[macclient].chan.split(" (")[0]+", "+strengthmap[macclient].strength+"dBm"
+      if (haasdebug) console.log(ename)
     }
     var nedge = graph.newEdge(rnode, cnode, {label: ename, color: '#A00000', directional: 1, weight: 1, font: '10px Verdana, sans-serif'});
 
