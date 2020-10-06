@@ -1,20 +1,28 @@
 <%+header%>                                                                    
-<h2><%:Maxwell HaasMesh Monitor%></h2>
+<h2><%:Maxwell Mesh Monitor%></h2>
 <br>
 <!-- <p><h3><a href="../system/commands"> Commands page </a></h3></p> -->
+
+<h3>Connection to internet</h3>
+<button id="buttonInternet" type="button" onclick="myInternet()"> <h5>- Refresh -</h5> </button>
+<p id="internet">Internet connection status will go here</p>
+<br>
 
 <h3>These are the mesh nodes</h3>
 <button id="buttonNodes" type="button" onclick="myNodes()"> <h5>- Refresh -</h5> </button>
 <p id="nodes">Nodes will go here</p>
 <br>
+
 <h3>This is the next node I'll go to (Nexthop) when trying to get to each node (Originator)</h3>
 <button id="buttonBatctlo" type="button" onclick="myBatctlo()"> <h5>- Run -</h5> </button>  
 <pre id="batctlo">"Batctl o" output will go here</pre>
 <br>
+
 <h3>This is a test download of 10 MB</h3>
 <button id="buttonDownload" type="button" onclick="myDownload()"> <h5>- Run -</h5> </button>
 <pre id="download">Test download result here</pre>
 <br>
+
 <h3>This is the bandwidth (Mb/s) forwards and backwards to and from me to each node</h3>
 <button type="button" onclick="myBandwidth()"> <h5>- Run -</h5> </button>
 <pre id="bandwidth">Bandwidth result here</pre>
@@ -47,7 +55,10 @@
 <script>
 window.onload = onLoad();
 function onLoad(){
+  myInternet();
   myNodes();  
+  postcmdval("/root/script/getapssid.sh","apssid");
+  postcmdval("/root/script/getmeshname.sh","meshname");
 }
 
 function changenodepass(){
@@ -69,11 +80,13 @@ function changemeshnamepass(){
   }
 }
 
+function myInternet() {
+  document.getElementById("internet").innerHTML="working...";
+  postcmd("/root/script/internethtml.sh","internet");
+}
 function myNodes() {
   document.getElementById("nodes").innerHTML="working...";
   postcmd("/root/script/nodeshtml.sh","nodes");
-  postcmdval("/root/script/getapssid.sh","apssid");
-  postcmdval("/root/script/getmeshname.sh","meshname");
 }
 function removeNode(n) {
   if (confirm("Do you really want to forget about node "+n+"?")){
