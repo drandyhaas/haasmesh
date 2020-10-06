@@ -1,6 +1,6 @@
 haasdebug=0
 
-strengthmap={}
+strengthmap=new Map()
 txt2 = txt2.slice(0, -1)
 txt2=txt2.replaceAll('",' , '":')
 txt2=txt2.replaceAll('\x0a','|')
@@ -11,6 +11,7 @@ if (haasdebug) console.log("Num nodes reporting: "+ obj2.vis2.length )
 for (x in obj2.vis2) {
   for (y in obj2.vis2[x]) {
     if (haasdebug) console.log("Node mac: "+ y)
+    strengthmap.set(y.toUpperCase(),new Map())
     res=obj2.vis2[x][y].slice(0, -1).split("|")
     if (haasdebug) console.log("Node connections: "+ res )
     for (i in res){
@@ -23,8 +24,8 @@ for (x in obj2.vis2) {
         if (haasdebug) console.log("rese[2]: "+rese[2])
         ress = rese[2].split(" ")
         for (r=0; r<ress.length; r+=3){
-          if (haasdebug) console.log("Enpoint mac / strength dBm: "+ress[r+0]+" / "+ress[r+1])
-          strengthmap[ress[r+0].toUpperCase()]={strength: ress[r+1], chan: chan}
+          if (haasdebug) console.log("Endpoint mac / strength dBm: "+ress[r+0]+" / "+ress[r+1])
+          strengthmap.get(y.toUpperCase()).set(ress[r+0].toUpperCase(), {strength: ress[r+1], chan: chan})
         }
       }
     }
@@ -38,6 +39,8 @@ for (r = 0; r < obj.vis.length; r++) {
 
   var name = obj.vis[r].primary
   if (name.indexOf(" ")>-1){
+    macnode = name.slice(0,name.indexOf(" ")).toUpperCase()
+    if (haasdebug) console.log("macnode: "+macnode)
     name = name.slice(name.indexOf(" ")+1);
   }
   if (name.indexOf("-192.168.")>-1){
@@ -58,6 +61,8 @@ for (r = 0; r < obj.vis.length; r++) {
   for (n = 0; n < obj.vis[r].neighbors.length; n++) {
     var name2 = obj.vis[r].neighbors[n].neighbor
     if (name2.indexOf(" ")>-1){
+      macnode2 = name2.slice(0,name2.indexOf(" ")).toUpperCase()
+      if (haasdebug) console.log("macnode2: "+macnode2)
       name2 = name2.slice(name2.indexOf(" ")+1);
     }
     if (name2.indexOf("-192.168.")>-1){
@@ -68,14 +73,29 @@ for (r = 0; r < obj.vis.length; r++) {
       var nnode = graph.newNode({label: name2, color: '#00F000', font: '16px Verdana, sans-serif'});
       nodemap[name2]=nnode
     }
-    var ename = "edge"
+    var ename = "LAN"
     var eweight = 3.33333
-    if (obj.vis[r].neighbors[n].metric!=undefined){
-      ename = obj.vis[r].neighbors[n].metric
-      eweight = eweight/(1.0 + 300.*(parseFloat(ename)-1.0))
-      ename = (30.0*eweight).toFixed(0)
+    var nc='#005050' //LAN color
+    //if (obj.vis[r].neighbors[n].metric!=undefined){
+    //  ename = obj.vis[r].neighbors[n].metric
+    //  eweight = eweight/(1.0 + 300.*(parseFloat(ename)-1.0))
+    //  ename = (30.0*eweight).toFixed(0)
+    //}
+    for (let [key, value] of strengthmap) {
+      if (haasdebug && key==macnode) console.log("key matching macnode : "+key)
+      if (vv=value.get(macnode2)){
+        ch = vv.chan.split(" (")[0]
+        if (Number(ch)<20) nc='#001010' //2G
+        else nc='#009090' //5G
+        ename = "Ch"+ch+", "+vv.strength+"dBm"
+        dbm = Number(vv.strength)
+        eweight = 0.4*(10.0+(dbm/10.0))
+        //ename += " "+eweight.toFixed(2)
+        if (haasdebug) console.log("node pair ename :"+ename)
+        break; //found it
+      }
     }
-    var nedge = graph.newEdge(rnode, nnode, {label: ename, color: '#00A0B0', directional: 1, weight: eweight.toString(), font: '10px Verdana, sans-serif'});
+    var nedge = graph.newEdge(rnode, nnode, {label: ename, color: nc, directional: 1, weight: eweight.toString(), font: '10px Verdana, sans-serif'});
 
   }
 
@@ -93,16 +113,26 @@ for (r = 0; r < obj.vis.length; r++) {
     }
     var cnode = nodemap[name3]
     if (cnode==undefined){
-      var cnode = graph.newNode({label: name3.replace(" ","\n"), color: '#0000F0', font: '16px Verdana, sans-serif'});
+      var cnode = graph.newNode({label: name3.replace(" ","\n"), color: '#0000F0', font: '12px Verdana, sans-serif'});
       nodemap[name3]=cnode
     }
     var ename = "LAN"
-    var eweight = 1.0
-    if (strengthmap[macclient]!=undefined){
-      ename = "Ch"+strengthmap[macclient].chan.split(" (")[0]+", "+strengthmap[macclient].strength+"dBm"
-      if (haasdebug) console.log(ename)
+    var eweight = 3.33333/2.0
+    var nc='#200000' //LAN color
+    for (let [key, value] of strengthmap) {
+      if (haasdebug) console.log("key : "+key)
+      if (vv=value.get(macclient)){
+        ch = vv.chan.split(" (")[0]
+        if (Number(ch)<20) nc='#800000' //2G
+        else nc='#E00000' //5G
+        ename = "Ch"+ch+", "+vv.strength+"dBm"
+        dbm = Number(vv.strength)
+        eweight = 0.2*(10.0+(dbm/10.0))
+        if (haasdebug) console.log(ename)
+        break; //found it
+      }
     }
-    var nedge = graph.newEdge(rnode, cnode, {label: ename, color: '#A00000', directional: 1, weight: 1, font: '10px Verdana, sans-serif'});
+    var nedge = graph.newEdge(rnode, cnode, {label: ename, color: nc, directional: 1, weight: eweight.toString(), font: '10px Verdana, sans-serif'});
 
   }
 
