@@ -1,4 +1,6 @@
-haasdebug=0
+
+
+haasdebug=1
 
 strengthmap=new Map()
 txt2 = txt2.slice(0, -1)
@@ -32,45 +34,61 @@ for (x in obj2.vis2) {
   }
 }
 
+var obj3 = txt3.split("||")
+if (haasdebug) console.log("obj3 length is: "+obj3.length)
+macmap={}
+for (o in obj3){
+  l=obj3[o].split(" ")
+  if (l.length>1) {
+    if (haasdebug) console.log("l is: "+l[0]+" / "+l[1])
+    sip=l[1]
+    if (sip.indexOf("-192.168.")>-1){
+      sip = sip.slice(sip.indexOf("-192.168.")+1);
+    }
+    macmap[l[0].toUpperCase()]={ip:sip}
+  }
+}
+
+var obj4 = txt4.split("||")
+if (haasdebug) console.log("obj4 length is: "+obj4.length)
+dhcpmap={}
+for (o2 in obj4){
+  l2=obj4[o2].split(" ")
+  if (l2.length>3) {
+    if (haasdebug) console.log("l2 is: "+l2[1]+" / "+l2[2]+" / "+l2[3])
+    dhcpmap[l2[1].toUpperCase()]={ip:l2[2],host:l2[3]}
+  }
+}
+
 var obj = JSON.parse(txt);
 nodemap={}
-var r;
 for (r = 0; r < obj.vis.length; r++) {
 
-  var name = obj.vis[r].primary
-  if (name.indexOf(" ")>-1){
-    macnode = name.slice(0,name.indexOf(" ")).toUpperCase()
-    if (haasdebug) console.log("macnode: "+macnode)
-    name = name.slice(name.indexOf(" ")+1);
-  }
-  if (name.indexOf("-192.168.")>-1){
-    name = name.slice(name.indexOf("-192.168.")+1);
+  var name = obj.vis[r].primary.toUpperCase()
+  var macnode = name
+  if (haasdebug) console.log("macnode: "+macnode)
+  if (macmap[macnode]!=undefined){
+    name = macmap[macnode].ip
   }
   var rnode = nodemap[name]
   if (rnode==undefined){
-    rnode = graph.newNode({label: name, color: '#000000', font: '16px Verdana, sans-serif', ondoubleclick: function() { console.log("Hello!"); } });
+    rnode = graph.newNode({label: name});
     nodemap[name]=rnode
   }
-  else{
-    rnode.data.color= '#000000'
-    rnode.data.font= '16px Verdana, sans-serif'
-    rnode.data.ondoubleclick= function() { console.log("Hello "+rnode.data.label+" !"); }
-  }
+  rnode.data.color= '#000000'
+  rnode.data.font= '16px Verdana, sans-serif'
+  rnode.data.ondoubleclick= function() { console.log("Hello "+rnode.data.label+" !"); }
 
-  var n;
   for (n = 0; n < obj.vis[r].neighbors.length; n++) {
-    var name2 = obj.vis[r].neighbors[n].neighbor
-    if (name2.indexOf(" ")>-1){
-      macnode2 = name2.slice(0,name2.indexOf(" ")).toUpperCase()
-      if (haasdebug) console.log("macnode2: "+macnode2)
-      name2 = name2.slice(name2.indexOf(" ")+1);
-    }
-    if (name2.indexOf("-192.168.")>-1){
-      name2 = name2.slice(name2.indexOf("-192.168.")+1);
+    var name2 = obj.vis[r].neighbors[n].neighbor.toUpperCase()
+    var macnode2 = name2
+    if (haasdebug) console.log("macnode2: "+macnode2)
+    if (macmap[macnode2]!=undefined){
+      name2 = macmap[macnode2].ip                         
     }
     var nnode = nodemap[name2]
     if (nnode==undefined){
-      var nnode = graph.newNode({label: name2, color: '#00F000', font: '16px Verdana, sans-serif'});
+      nnode = graph.newNode({label: name2, color: '#00F000', font: '16px Verdana, sans-serif'});
       nodemap[name2]=nnode
     }
     var ename = "LAN"
@@ -82,34 +100,45 @@ for (r = 0; r < obj.vis.length; r++) {
     //  ename = (30.0*eweight).toFixed(0)
     //}
     for (let [key, value] of strengthmap) {
-      if (haasdebug && key==macnode) console.log("key matching macnode : "+key)
-      if (vv=value.get(macnode2)){
-        ch = vv.chan.split(" (")[0]
-        if (Number(ch)<20) nc='#001010' //2G
-        else nc='#009090' //5G
-        ename = "Ch"+ch+", "+vv.strength+"dBm"
-        dbm = Number(vv.strength)
-        eweight = 0.4*(10.0+(dbm/10.0))
-        //ename += " "+eweight.toFixed(2)
-        if (haasdebug) console.log("node pair ename :"+ename)
-        break; //found it
+      keyn=key
+      if (macmap[key]!=undefined){
+        keyn=macmap[key].ip
+      }
+      if (keyn==name){ // this should be the ip of the first node
+        if (haasdebug) console.log("key is : "+keyn)
+        if (vv=value.get(macnode2)){ // look for the mac of the second node
+          if (ename != "LAN"){
+            if (haasdebug) console.log("Already had wifi info for link from "+macnode+"/"+name+" to "+macnode2+"/"+name2)
+          }
+          ch = vv.chan.split(" (")[0]
+          if (Number(ch)<20) nc='#001010' //2G
+          else nc='#009090' //5G
+          ename = "Ch"+ch+", "+vv.strength+"dBm"
+          dbm = Number(vv.strength)
+          eweight = 0.4*(10.0+(dbm/10.0))
+          if (haasdebug) console.log("node pair ename :"+ename)
+          //break; //found it
+        }
       }
     }
     var nedge = graph.newEdge(rnode, nnode, {label: ename, color: nc, directional: 1, weight: eweight.toString(), font: '10px Verdana, sans-serif'});
 
   }
 
-  var c;
   for (c = 0; c < obj.vis[r].clients.length; c++) {
-    var name3 = obj.vis[r].clients[c]
-    macclient=""
-    if (name3.indexOf(" ")>-1){
-      macclient = name3.slice(0,name3.indexOf(" ")).toUpperCase()
-      if (haasdebug) console.log("macclient: "+macclient)
-      name3 = name3.slice(name3.indexOf(" ")+1);
+    var name3 = obj.vis[r].clients[c].toUpperCase()
+    macclient = name3
+    if (haasdebug) console.log("macclient: "+macclient)
+    if (macmap[macclient]!=undefined){
+      name3 = macmap[macclient].ip
+      if (name == name3){
+        if (haasdebug) console.log(name3+" is already a node")
+        continue;
+      }
     }
-    if (name3.indexOf("-192.168.")>-1){
-      name3 = name3.slice(name3.indexOf("-192.168.")+1);
+    if (dhcpmap[macclient]!=undefined){
+      name3 = dhcpmap[macclient].ip
+      if (dhcpmap[macclient].host!="*") name3+="\n"+dhcpmap[macclient].host
     }
     var cnode = nodemap[name3]
     if (cnode==undefined){
@@ -122,6 +151,9 @@ for (r = 0; r < obj.vis.length; r++) {
     for (let [key, value] of strengthmap) {
       if (haasdebug) console.log("key : "+key)
       if (vv=value.get(macclient)){
+        if (ename != "LAN"){
+          if (haasdebug) console.log("Already had wifi info for client link from "+macnode+"/"+name+" to "+macclient+"/"+name3)
+        }
         ch = vv.chan.split(" (")[0]
         if (Number(ch)<20) nc='#800000' //2G
         else nc='#E00000' //5G
@@ -129,7 +161,7 @@ for (r = 0; r < obj.vis.length; r++) {
         dbm = Number(vv.strength)
         eweight = 0.2*(10.0+(dbm/10.0))
         if (haasdebug) console.log(ename)
-        break; //found it
+        //break; //found it
       }
     }
     var nedge = graph.newEdge(rnode, cnode, {label: ename, color: nc, directional: 1, weight: eweight.toString(), font: '10px Verdana, sans-serif'});
@@ -150,5 +182,4 @@ jQuery(function(){
 
 </body>
 </html>
-
 
