@@ -13,17 +13,17 @@
 <p id="nodes">Nodes will go here</p>
 <br>
 
-<h3>This is the next node I'll go to (Nexthop) when trying to get to each node (Originator)</h3>
-<button id="buttonBatctlo" type="button" onclick="myBatctlo()"> <h5>- Run -</h5> </button>  
-<pre id="batctlo">"Batctl o" output will go here</pre>
-<br>
-
-<h3>This is a test download of 10 MB</h3>
+<h3>Test download of 10 MB from internet</h3>
 <button id="buttonDownload" type="button" onclick="myDownload()"> <h5>- Run -</h5> </button>
 <pre id="download">Test download result here</pre>
 <br>
 
-<h3>This is the bandwidth (Mb/s) forwards and backwards to and from me to each node</h3>
+<h3>Speedtest to internet</h3>
+<button type="button" onclick="mySpeedtest()"> <h5>- Run -</h5> </button>  
+<pre id="speedtest">Speedtest result here</pre>
+<br>
+
+<h3>Bandwidth (Mb/s) between me and each node</h3>
 <button type="button" onclick="myBandwidth()"> <h5>- Run -</h5> </button>
 <pre id="bandwidth">Bandwidth result here</pre>
 
@@ -45,9 +45,13 @@
 <pre id="logtails">Log tails result here</pre>
 
 <br>
+<h3>This is the next node I'll go to (Nexthop) when trying to get to each node (Originator)</h3>
+<button id="buttonBatctlo" type="button" onclick="myBatctlo()"> <h5>- Run -</h5> </button>  
+<pre id="batctlo">"Batctl o" output will go here</pre>
+
+<br>
 <h3>This is the network map</h3>
 <button type="button" onclick="myMap()"> <h5>- Run -</h5> </button>    
-<!-- Paste into <a href="https://graphs.grevian.org/graph">here</a>, and choose fdp style -->
 <h3 id="map"> </h3>
 
 <br>
@@ -96,11 +100,15 @@ function removeNode(n) {
 }
 function myBatctlo() {
   document.getElementById("batctlo").innerHTML="working...";
-  postcmd("batctl o | sort -n","batctlo");
+  postcmd("/root/script/batctlo.sh","batctlo");
 }
 function myDownload() {
   document.getElementById("download").innerHTML="working...";
   postcmd("/root/script/speed_download.sh","download");
+}
+function mySpeedtest() {
+  document.getElementById("speedtest").innerHTML="working...";
+  postcmd("/root/script/speedtest.sh","speedtest");
 }
 function myBandwidth() {
   document.getElementById("bandwidth").innerHTML="working...";
