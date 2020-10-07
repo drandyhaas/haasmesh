@@ -1,6 +1,6 @@
 cd /root
 #git clone https://github.com/drandyhaas/haasmesh.git
-rm -rf script; ln -s haasmesh/script
+rm -rf script; cp -r haasmesh/script .
 cp haasmesh/etc/profile haasmesh/etc/rc.local /etc/
 mkdir -p /usr/lib/lua/luci/controller/myapp; ln -fs /root/haasmesh/haas_mesh_tab.lua  /usr/lib/lua/luci/controller/myapp/haas_mesh_tab.lua
 mkdir -p /usr/lib/lua/luci/view/myapp; ln -fs /root/haasmesh/monitor_tab.htm /usr/lib/lua/luci/view/myapp/monitor_tab.htm
