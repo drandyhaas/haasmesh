@@ -94,6 +94,7 @@ for (r = 0; r < obj.vis.length; r++) {
     var ename = "LAN"
     var eweight = 3.33333
     var nc='#005050' //LAN color
+    var dbm=0
     //if (obj.vis[r].neighbors[n].metric!=undefined){
     //  ename = obj.vis[r].neighbors[n].metric
     //  eweight = eweight/(1.0 + 300.*(parseFloat(ename)-1.0))
@@ -121,7 +122,9 @@ for (r = 0; r < obj.vis.length; r++) {
         }
       }
     }
-    var nedge = graph.newEdge(rnode, nnode, {label: ename, color: nc, directional: 1, weight: eweight.toString(), font: '10px Verdana, sans-serif'});
+    if (dbm>-85){ // don't draw really weak links
+      var nedge = graph.newEdge(rnode, nnode, {label: ename, color: nc, directional: 1, weight: eweight.toString(), font: '10px Verdana, sans-serif'});
+    }
 
   }
 
