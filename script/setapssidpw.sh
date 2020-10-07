@@ -14,6 +14,6 @@ done
 else
 echo "just a node"
 echo "Setting ssid to \"${1}\" and pw to \"${2}\" for me"
-uci set wireless.ap_2g_1.ssid=\"${1}\"; uci set wireless.ap_2g_1.key=\"${2}\"; uci set wireless.ap_5g_1.ssid=\"${1}\"; uci set wireless.ap_5g_1.key=\"${2}\"; uci set wireless.ap_5g_2.ssid=\"${1}\"; uci set wireless.ap_5g_2.key=\"${2}\"; uci commit; wifi
+uci set wireless.ap_2g_1.ssid="${1}"; uci set wireless.ap_2g_1.key="${2}"; uci set wireless.ap_5g_1.ssid="${1}"; uci set wireless.ap_5g_1.key="${2}"; uci set wireless.ap_5g_2.ssid="${1}"; uci set wireless.ap_5g_2.key="${2}"; uci commit; wifi
 
 fi
