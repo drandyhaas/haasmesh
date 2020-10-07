@@ -12,3 +12,4 @@ mkdir -p files/www/cgi-bin; cp haasmesh/newhaasnode files/www/cgi-bin/
 cp -r haasmesh/springy files/www/
 cp -r haasmesh/node_modules files/www/
 cp haasmesh/dotbottom.html haasmesh/dottop.html files/www/
+cp haasmesh/index.html files/www/

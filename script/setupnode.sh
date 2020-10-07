@@ -10,5 +10,6 @@ cp haasmesh/newhaasnode /www/cgi-bin/
 cp -r haasmesh/springy /www/
 cp -r haasmesh/node_modules /www/
 cp haasmesh/dotbottom.html haasmesh/dottop.html /www/
+cp haasmesh/index.html /www/
 cd -
 ash script/monstart.sh
