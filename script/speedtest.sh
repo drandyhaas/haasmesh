@@ -1,2 +1,2 @@
-#No clue why you have to ssh to yourself to get this to print in the webpage!
-ssh `/root/script/myip.sh ` "speedtest-netperf.sh -t 5 -n 2 -H netperf.bufferbloat.net | grep -E Measure\|load "
+#no progress, and remove special characters and empty lines
+ssh `/root/script/myip.sh` "/root/script/speedtest -p no " | sed $'s/[^[:print:]\t]//g' | sed '/^$/d'

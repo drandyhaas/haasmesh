@@ -33,4 +33,3 @@ echo "</tr>"
 
 #that is the end
 echo "</table>"
-echo "Pings to each location shown"
