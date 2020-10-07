@@ -10,7 +10,14 @@ sed -i s%eth3%eth0%g network
 
 cd -
 
-batethmac=`ifconfig | grep HW | grep \`uci get network.bat_eth.ifname\` |cut -d ":" -f 3-|sed 's% %%g'`
+batethifname=`uci get network.bat_eth.ifname`
+echo "Backhaul ethernet is now $batethifname "
+lanethifname=`uci get network.lan.ifname`
+echo "LAN ethernet is now $lanethifname "
+wanethifname=`uci get network.wan.ifname`
+echo "WAN ethernet is now $wanethifname "
+
+batethmac=`ifconfig | grep HW | grep $batethifname |cut -d ":" -f 3-|sed 's% %%g'`
 uci set network.bat_eth.macaddr="00:${batethmac}"
 uci changes
 uci commit

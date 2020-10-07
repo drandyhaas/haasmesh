@@ -115,8 +115,10 @@ function myBandwidth() {
 }
 
 function rotatelumaeth() {
-  document.getElementById("othercommandout").innerHTML="working...";
-  postcmd("/root/script/rotatelumaeth.sh","othercommandout");
+  if (confirm("Do you really want to rotate the Luma ethernet ports on this node?")){ 
+    document.getElementById("othercommandout").innerHTML="working...";
+    postcmd("/root/script/rotatelumaeth.sh","othercommandout");
+  }
 }
 
 function myLogtails() {
