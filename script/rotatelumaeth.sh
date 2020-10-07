@@ -1,3 +1,6 @@
+if dmesg|grep -q Luma;  then 
+echo "On a Luma - rotating eth ports"
+
 cd /etc/config
 
 sed -i s%eth2%eth3%g network
@@ -14,3 +17,6 @@ uci commit
 
 /etc/init.d/network restart
 
+else
+echo "Not on a Luma"
+fi
