@@ -11,13 +11,13 @@ fi
 
 pings=`for i in $allnodes ; do echo $i; /root/script/pingip.sh $i ; done | grep seq=0`
 
-echo "<table><tr> <th><h3>Node IP</h3></th> <th><h3>Mesh</h3></th> <th><h3>Ping</h3></th> </tr>"
+echo "<table><tr> <th>Node IP</th> <th>Mesh</th> <th>Ping</th> </tr>"
 for n in $allnodes; do
   echo "<tr><th>"
   if [ "$n" == "$myip" ]; then 
-   echo "<h4>$n</h4>"
+   echo "$n"
   else 
-   echo "<h4><a href=\"http://${n}\" rel=\"noopener noreferrer\" target=\"_blank\">$n</a></h4>"
+   echo "<a href=\"http://${n}\" rel=\"noopener noreferrer\" target=\"_blank\">$n</a>"
   fi
 
   nn=`echo $n | cut -f 4 -d .`

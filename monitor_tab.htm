@@ -3,32 +3,27 @@
 <br>
 <!-- <p><h3><a href="../system/commands"> Commands page </a></h3></p> -->
 
-<h3>Connection to internet</h3>
-<button id="buttonInternet" type="button" onclick="myInternet()"> <h5>- Refresh -</h5> </button>
+<h3>Connection to internet <button id="buttonInternet" type="button" onclick="myInternet()"> &nbsp Refresh &nbsp </button> </h3>
 <p id="internet">Internet connection status will go here</p>
 <br>
 
-<h3>These are the mesh nodes</h3>
-<button id="buttonNodes" type="button" onclick="myNodes()"> <h5>- Refresh -</h5> </button>
+<h3>Mesh nodes <button id="buttonNodes" type="button" onclick="myNodes()"> &nbsp Refresh &nbsp </button> </h3>
 <p id="nodes">Nodes will go here</p>
 <br>
 
-<h3>Test download of 10 MB from internet</h3>
-<button id="buttonDownload" type="button" onclick="myDownload()"> <h5>- Run -</h5> </button>
+<h3>Test download of 10 MB from internet <button id="buttonDownload" type="button" onclick="myDownload()"> &nbsp Run &nbsp </button> </h3>
 <pre id="download">Test download result here</pre>
 <br>
 
-<h3>Speedtest to internet</h3>
-<button type="button" onclick="mySpeedtest()"> <h5>- Run -</h5> </button>  
+<h3>Speedtest of internet <button type="button" onclick="mySpeedtest()"> &nbsp Run &nbsp </button> </h3>
 <pre id="speedtest">Speedtest result here</pre>
 <br>
 
-<h3>Bandwidth (Mb/s) between me and each node</h3>
-<button type="button" onclick="myBandwidth()"> <h5>- Run -</h5> </button>
+<h3>Bandwidth between me and each node <button type="button" onclick="myBandwidth()"> &nbsp Run &nbsp </button> </h3>
 <pre id="bandwidth">Bandwidth result here</pre>
 
 <br>
-<h3>Modify the setup of nodes</h3>
+<h3>Modify mesh node setup</h3>
 <form >
   <label for="nodepass">Root Login Password:</label> 
   <input type="text" id="nodepass" value=""> <input type="button" value="Change Root Login Password" onclick="changenodepass()" ><br><br>
@@ -40,19 +35,16 @@
 <pre id="commandout">Command output here</pre>
 
 <br>
-<h3>These are the tails of all the logs on all the nodes</h3>
-<button type="button" onclick="myLogtails()"> <h5>- Run -</h5> </button>
+<h3>Tails of mesh node logs <button type="button" onclick="myLogtails()"> &nbsp Run &nbsp </button> </h3>
 <pre id="logtails">Log tails result here</pre>
 
 <br>
-<h3>This is the next node I'll go to (Nexthop) when trying to get to each node (Originator)</h3>
-<button id="buttonBatctlo" type="button" onclick="myBatctlo()"> <h5>- Run -</h5> </button>  
-<pre id="batctlo">"Batctl o" output will go here</pre>
+<h3>Next mesh node (Nexthop) when going to each node (Originator) <button id="buttonBatctlo" type="button" onclick="myBatctlo()"> &nbsp Run &nbsp </button> </h3>
+<pre id="batctlo">Output will go here</pre>
 
 <br>
-<h3>This is the network map</h3>
-<button type="button" onclick="myMap()"> <h5>- Run -</h5> </button>    
-<div id="map"> </div>
+<h3>Super-cool network map <button type="button" onclick="myMap()"> &nbsp Run &nbsp </button> </h3>
+<div id="map"><pre>Map link will appear here</pre></div>
 
 <br>
 
@@ -138,8 +130,8 @@ function postcmdval(cmd,elem) {
 
 <style>
 .reddot {
-  height: 25px;
-  width: 25px;
+  height: 15px;
+  width: 15px;
   background-color: #d00;
   border-radius: 50%;
   display: inline-block;
@@ -148,8 +140,8 @@ function postcmdval(cmd,elem) {
 
 <style>
 .yellodot {
-  height: 25px;
-  width: 25px;
+  height: 15px;
+  width: 15px;
   background-color: #dd0;
   border-radius: 50%;
   display: inline-block;
@@ -158,8 +150,8 @@ function postcmdval(cmd,elem) {
 
 <style>
 .greendot {
-  height: 25px;
-  width: 25px;
+  height: 15px;
+  width: 15px;
   background-color: #0d0;
   border-radius: 50%;
   display: inline-block;
@@ -175,8 +167,8 @@ table {
 }
 
 th, td {
-  text-align: left;
-  padding: 16px;
+  text-align: center;
+  padding: 8px;
 }
 
 tr:nth-child(even) {
