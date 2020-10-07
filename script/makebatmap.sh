@@ -29,5 +29,5 @@ echo "'" >> /www/dotbat.html
 
 cat /www/dotbottom.html >> /www/dotbat.html
 
-echo "<a href=\"../../../../dotbat.html\">Click to view map</a>"
+echo "<h4><a href=\"../../../../dotbat.html\">Click to view map</a></h4>"
 
