@@ -1,4 +1,4 @@
-if dmesg|grep -q Luma;  then 
+if dmesg|grep -q "Machine model: Luma";  then 
 echo "On a Luma - rotating eth ports"
 
 cd /etc/config
