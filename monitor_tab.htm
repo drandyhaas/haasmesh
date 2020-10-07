@@ -3,23 +3,23 @@
 <br>
 <!-- <p><h3><a href="../system/commands"> Commands page </a></h3></p> -->
 
-<h3>Connection to internet <button id="buttonInternet" type="button" onclick="myInternet()"> &nbsp Refresh &nbsp </button> </h3>
+<h3>Connection to internet <input id="buttonInternet" type="button" onclick="myInternet()" value="Refresh"> </h3>
 <p id="internet">Internet connection status will go here</p>
 <br>
 
-<h3>Mesh nodes <button id="buttonNodes" type="button" onclick="myNodes()"> &nbsp Refresh &nbsp </button> </h3>
+<h3>Mesh nodes <input id="buttonNodes" type="button" onclick="myNodes()" value="Refresh"> </h3>
 <p id="nodes">Nodes will go here</p>
 <br>
 
-<h3>Test download of 10 MB from internet <button id="buttonDownload" type="button" onclick="myDownload()"> &nbsp Run &nbsp </button> </h3>
+<h3>Test download of 10 MB from internet <input id="buttonDownload" type="button" onclick="myDownload()" value="Run"> </h3>
 <pre id="download">Test download result here</pre>
 <br>
 
-<h3>Speedtest of internet <button type="button" onclick="mySpeedtest()"> &nbsp Run &nbsp </button> </h3>
+<h3>Speedtest of internet <input type="button" onclick="mySpeedtest()" value="Run"> </h3>
 <pre id="speedtest">Speedtest result here</pre>
 <br>
 
-<h3>Bandwidth between me and each node <button type="button" onclick="myBandwidth()"> &nbsp Run &nbsp </button> </h3>
+<h3>Bandwidth between me and each node <input type="button" onclick="myBandwidth()" value="Run"> </h3>
 <pre id="bandwidth">Bandwidth result here</pre>
 
 <br>
@@ -27,23 +27,30 @@
 <form >
   <label for="nodepass">Root Login Password:</label> 
   <input type="text" id="nodepass" value=""> <input type="button" value="Change Root Login Password" onclick="changenodepass()" ><br><br>
-  <label for="nodepass">Access Point SSID and Password:</label> 
+  <label for="apchange">Access Point SSID and Password:</label> 
   <input type="text" id="apssid" value="">  <input type="text" id="appass" value=""> <input type="button" value="Change Access Point SSID and Password" onclick="changeapssidpass()" ><br><br>
-  <label for="nodepass">Hidden Mesh Name and Password:</label> 
+  <label for="messchange">Hidden Mesh Name and Password:</label> 
   <input type="text" id="meshname" value="">  <input type="text" id="meshpass" value=""> <input type="button" value="Change Hidden Mesh Name and Password" onclick="changemeshnamepass()" ><br>
 </form>
 <pre id="commandout">Command output here</pre>
 
 <br>
-<h3>Tails of mesh node logs <button type="button" onclick="myLogtails()"> &nbsp Run &nbsp </button> </h3>
+<h3>Other misc setup</h3>
+<form >
+  <input type="button" value="Rotate Luma ethernet ports" onclick="rotatelumaeth()" ><br>
+</form>
+<pre id="othercommandout">Command output here</pre>
+
+<br>
+<h3>Tails of mesh node logs <input type="button" onclick="myLogtails()" value="Run"> </h3>
 <pre id="logtails">Log tails result here</pre>
 
 <br>
-<h3>Next mesh node (Nexthop) when going to each node (Originator) <button id="buttonBatctlo" type="button" onclick="myBatctlo()"> &nbsp Run &nbsp </button> </h3>
+<h3>Next mesh node (Nexthop) when going to each node (Originator) <input id="buttonBatctlo" type="button" onclick="myBatctlo()" value="Run"> </h3>
 <pre id="batctlo">Output will go here</pre>
 
 <br>
-<h3>Super-cool network map <button type="button" onclick="myMap()"> &nbsp Run &nbsp </button> </h3>
+<h3>Super-cool network map <input type="button" onclick="myMap()" value="Run"> </h3>
 <div id="map"><pre>Map link will appear here</pre></div>
 
 <br>
@@ -106,6 +113,12 @@ function myBandwidth() {
   document.getElementById("bandwidth").innerHTML="working...";
   postcmd("/root/script/speednodes.sh","bandwidth");
 }
+
+function rotatelumaeth() {
+  document.getElementById("othercommandout").innerHTML="working...";
+  postcmd("/root/script/rotatelumaeth.sh","othercommandout");
+}
+
 function myLogtails() {
   document.getElementById("logtails").innerHTML="working...";
   postcmd("/root/script/foreachnode.sh \"logread|tail\" ","logtails");
