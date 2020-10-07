@@ -23,6 +23,22 @@
 <pre id="bandwidth">Bandwidth result here</pre>
 
 <br>
+<h3>Super-cool network map <input type="button" onclick="myMap()" value="Run"> </h3>
+<div id="map"><pre>Map link will appear here</pre></div>
+
+<br>
+<h3>Trace of path to each node <input type="button" onclick="myTraceall()" value="Run"> </h3>
+<pre id="traceall">Output will go here</pre>
+
+<br>
+<h3>Next mesh node (Nexthop) when going to each node (Originator) <input id="buttonBatctlo" type="button" onclick="myBatctlo()" value="Run"> </h3>
+<pre id="batctlo">Output will go here</pre>
+
+<br>
+<h3>Tails of mesh node logs <input type="button" onclick="myLogtails()" value="Run"> </h3>
+<pre id="logtails">Log tails result here</pre>
+
+<br>
 <h3>Modify mesh node setup</h3>
 <form >
   <label for="nodepass">Root Login Password:</label> 
@@ -40,18 +56,6 @@
   <input type="button" value="Rotate Luma ethernet ports" onclick="rotatelumaeth()" ><br>
 </form>
 <pre id="othercommandout">Command output here</pre>
-
-<br>
-<h3>Tails of mesh node logs <input type="button" onclick="myLogtails()" value="Run"> </h3>
-<pre id="logtails">Log tails result here</pre>
-
-<br>
-<h3>Next mesh node (Nexthop) when going to each node (Originator) <input id="buttonBatctlo" type="button" onclick="myBatctlo()" value="Run"> </h3>
-<pre id="batctlo">Output will go here</pre>
-
-<br>
-<h3>Super-cool network map <input type="button" onclick="myMap()" value="Run"> </h3>
-<div id="map"><pre>Map link will appear here</pre></div>
 
 <br>
 
@@ -96,6 +100,11 @@ function removeNode(n) {
     postcmd("/root/script/removenode.sh "+n,"nodes");
     //postcmd("/root/script/nodeshtml.sh","nodes");
   }
+}
+
+function myTraceall() {
+  document.getElementById("traceall").innerHTML="working...";
+  postcmd("/root/script/traceall.sh","traceall");
 }
 function myBatctlo() {
   document.getElementById("batctlo").innerHTML="working...";
