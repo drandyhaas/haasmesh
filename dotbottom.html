@@ -92,7 +92,7 @@ for (r = 0; r < obj.vis.length; r++) {
       nodemap[name2]=nnode
     }
     var ename = "LAN"
-    var eweight = 3.33333
+    var eweight = 3.0
     var nc='#005050' //LAN color
     var dbm=0
     //if (obj.vis[r].neighbors[n].metric!=undefined){
@@ -116,14 +116,14 @@ for (r = 0; r < obj.vis.length; r++) {
           else nc='#009090' //5G
           ename = "Ch"+ch+", "+vv.strength+"dBm"
           dbm = Number(vv.strength)
-          eweight = 0.4*(10.0+(dbm/10.0))
+          eweight = Math.max(0.4*(10.0+(dbm/10.0)),0.1)
           if (haasdebug) console.log("node pair ename :"+ename)
           //break; //found it
         }
       }
     }
     if (dbm>-85){ // don't draw really weak links
-      var nedge = graph.newEdge(rnode, nnode, {label: ename, color: nc, directional: 1, weight: eweight.toString(), font: '10px Verdana, sans-serif'});
+      var nedge = graph.newEdge(nnode, rnode, {label: ename, color: nc, directional: 1, weight: eweight.toString(), font: '10px Verdana, sans-serif'});
     }
 
   }
@@ -149,7 +149,7 @@ for (r = 0; r < obj.vis.length; r++) {
       nodemap[name3]=cnode
     }
     var ename = "LAN"
-    var eweight = 3.33333/2.0
+    var eweight = 2.0
     var nc='#200000' //LAN color
     for (let [key, value] of strengthmap) {
       if (haasdebug) console.log("key : "+key)
@@ -162,12 +162,12 @@ for (r = 0; r < obj.vis.length; r++) {
         else nc='#E00000' //5G
         ename = "Ch"+ch+", "+vv.strength+"dBm"
         dbm = Number(vv.strength)
-        eweight = 0.2*(10.0+(dbm/10.0))
+        eweight = Math.max(0.3*(10.0+(dbm/10.0)),0.1)
         if (haasdebug) console.log(ename)
         //break; //found it
       }
     }
-    var nedge = graph.newEdge(rnode, cnode, {label: ename, color: nc, directional: 1, weight: eweight.toString(), font: '10px Verdana, sans-serif'});
+    var nedge = graph.newEdge(cnode, rnode, {label: ename, color: nc, directional: 0, weight: eweight.toString(), font: '10px Verdana, sans-serif'});
 
   }
 
