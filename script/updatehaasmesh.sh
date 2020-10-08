@@ -7,14 +7,17 @@ cd -
 
 else
 
-wget --no-check-certificate https://github.com/drandyhaas/haasmesh/archive/master.zip;
 if opkg list-installed | grep -q unzip; then
 echo "got zip"
 else
-opkg update
+opkg update > /dev/null
 opkg install unzip
+opkg install wget
 fi
-unzip master.zip; 
+
+wget -q --no-check-certificate https://github.com/drandyhaas/haasmesh/archive/master.zip;
+unzip master.zip > /dev/null ; 
+rm -rf haasmesh
 mv haasmesh-master haasmesh
 rm master.zip
 
