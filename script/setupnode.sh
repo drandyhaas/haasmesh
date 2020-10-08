@@ -1,5 +1,4 @@
 cd /root
-#git clone https://github.com/drandyhaas/haasmesh.git
 rm -rf script; cp -r haasmesh/script .
 cp haasmesh/etc/profile haasmesh/etc/rc.local /etc/
 mkdir -p /usr/lib/lua/luci/controller/myapp; ln -fs /root/haasmesh/haas_mesh_tab.lua  /usr/lib/lua/luci/controller/myapp/haas_mesh_tab.lua
@@ -9,7 +8,8 @@ mkdir -p /etc/hotplug.d/button; cp haasmesh/etc/hotplug.d/button/buttons /etc/ho
 cp haasmesh/newhaasnode /www/cgi-bin/
 cp -r haasmesh/springy /www/
 cp -r haasmesh/node_modules /www/
-cp haasmesh/dotbottom.html haasmesh/dottop.html /www/
+ln -fs haasmesh/dotbottom.html /www/dotbottom.html
+ln -fs haasmesh/dottop.html /www/dottop.html
 cp haasmesh/index.html /www/
 cd -
 ash script/monstart.sh
