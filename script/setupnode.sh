@@ -20,8 +20,8 @@ mkdir -p /etc/hotplug.d/button; cp haasmesh/etc/hotplug.d/button/buttons /etc/ho
 cp haasmesh/newhaasnode /www/cgi-bin/
 cp -r haasmesh/springy /www/
 cp -r haasmesh/node_modules /www/
-ln -fs haasmesh/dotbottom.html /www/dotbottom.html
-ln -fs haasmesh/dottop.html /www/dottop.html
+ln -fs /root/haasmesh/dotbottom.html /www/dotbottom.html
+ln -fs /root/haasmesh/dottop.html /www/dottop.html
 cp haasmesh/index.html /www/
 cd -
 
