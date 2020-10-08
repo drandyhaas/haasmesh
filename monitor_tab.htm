@@ -132,7 +132,7 @@ function rotatelumaeth() {
 function updatehaasmesh() {
   if (confirm("Do you really want to update the scripts (on all nodes if this is a hub!)?")){ 
     document.getElementById("othercommandout").innerHTML="working...";
-    postcmd("/root/script/foreachnode.sh \"/root/script/updatehaasmesh.sh & \" ","othercommandout");
+    postcmd("/root/script/foreachnodeparallel.sh \" /root/script/updatehaasmesh.sh \" ","othercommandout");
   }
 }
 
