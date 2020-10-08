@@ -53,8 +53,7 @@
 <br>
 <h3>Other misc setup</h3>
 <form >
-  <input type="button" value="Rotate Luma ethernet ports" onclick="rotatelumaeth()" ><br>
-  <input type="button" value="Update these scripts from github" onclick="updatehaasmesh()" ><br>
+  <input type="button" value="Rotate Luma ethernet ports" onclick="rotatelumaeth()" > <input type="button" value="Update these scripts from github" onclick="updatehaasmesh()" ><br>
 </form>
 <pre id="othercommandout">Command output here</pre>
 
@@ -133,7 +132,7 @@ function rotatelumaeth() {
 function updatehaasmesh() {
   if (confirm("Do you really want to update the scripts (on all nodes if this is a hub!)?")){ 
     document.getElementById("othercommandout").innerHTML="working...";
-    postcmd("/root/script/foreachnode.sh \"/root/script/updatehaasmesh.sh\" ","othercommandout");
+    postcmd("/root/script/foreachnode.sh \"/root/script/updatehaasmesh.sh & \" ","othercommandout");
   }
 }
 
