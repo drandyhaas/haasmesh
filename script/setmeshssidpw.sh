@@ -9,7 +9,7 @@ echo "master hub"
 #for n in 19; do n="192.168.2.$n"
 for n in `/root/script/nodes.sh`; do
    echo "Setting mesh ssid to \"${1}\" and pw to \"${2}\" for node $n "
-   ssh $n "uci set wireless.mesh0.mesh_id=\"${1}\"; uci set wireless.mesh0.key=\"${2}\"; uci changes; uci commit; /root/script/wifi30s.sh &"
+   ssh $n "uci set wireless.mesh0.mesh_id=\"${1}\"; uci set wireless.mesh0.key=\"${2}\"; uci changes; uci commit; /root/script/wifi10s.sh &"
 done
 
 else

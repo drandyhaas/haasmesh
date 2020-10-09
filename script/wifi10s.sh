@@ -1,3 +1,3 @@
-sleep 30
+sleep 10
 wifi &> /dev/null
 
