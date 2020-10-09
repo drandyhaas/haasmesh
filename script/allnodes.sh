@@ -8,8 +8,5 @@ if [ `echo $myip | cut -f 4 -d . ` -eq 1 ]; then
     grep -x $n /www/allnodes.txt >/dev/null
     if [ $? -eq 1 ]; then echo $n >> /www/allnodes.txt; fi
   done
-  allnodes=`cat /www/allnodes.txt`
-else
-  allnodes=$nodes
 fi
-
+cat /www/allnodes.txt |uniq > /www/allnodes.txt
