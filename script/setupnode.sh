@@ -26,4 +26,4 @@ cp haasmesh/index.html /www/
 cd -
 
 echo "starting monitoring"
-ash script/monstart.sh
+ash /root/script/monstart.sh
