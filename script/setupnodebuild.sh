@@ -1,4 +1,5 @@
 #git clone https://github.com/drandyhaas/haasmesh.git
+rm -rf files
 mkdir -p files/etc/config
 cp haasmesh/etc/config/wireless_$1 files/etc/config/wireless
 cp haasmesh/etc/config/network_$1 files/etc/config/network
