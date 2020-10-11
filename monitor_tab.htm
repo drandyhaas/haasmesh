@@ -3,11 +3,8 @@
 <br>
 <!-- <p><h3><a href="../system/commands"> Commands page </a></h3></p> -->
 
-<h3>Connection to internet <input id="buttonInternet" type="button" onclick="myInternet()" value="Refresh"> </h3>
+<h3>Mesh nodes and internet connection<input id="buttonNodes" type="button" onclick="noderefresh()"> </h3>
 <p id="internet">Internet connection status will go here</p>
-<br>
-
-<h3>Mesh nodes <input id="buttonNodes" type="button" onclick="myNodes()" value="Refresh"> </h3>
 <p id="nodes">Nodes will go here</p>
 <br>
 
@@ -61,11 +58,26 @@
 
 <script>
 window.onload = onLoad();
+var noderefreshtimer
+var noderefreshing
 function onLoad(){
-  myInternet();
-  myNodes();  
-  postcmdval("/root/script/getapssid.sh","apssid");
-  postcmdval("/root/script/getmeshname.sh","meshname");
+  noderefreshing=0
+  noderefresh()
+  postcmdval("/root/script/getapssid.sh","apssid")
+  postcmdval("/root/script/getmeshname.sh","meshname")
+}
+function noderefresh(){
+  if (noderefreshing){
+  noderefreshing=0
+  clearInterval(noderefreshtimer)
+  document.getElementById("buttonNodes").value="Start refreshing"
+  } 
+  else {
+  noderefreshing=1
+  myNodes()
+  document.getElementById("buttonNodes").value="Stop refreshing"
+  noderefreshtimer = setInterval(myNodes,30000)
+  }
 }
 
 function changenodepass(){
@@ -87,11 +99,9 @@ function changemeshnamepass(){
   }
 }
 
-function myInternet() {
+function myNodes() {
   document.getElementById("internet").innerHTML="working...";
   postcmd("/root/script/internethtml.sh","internet");
-}
-function myNodes() {
   document.getElementById("nodes").innerHTML="working...";
   postcmd("/root/script/nodeshtml.sh","nodes");
 }
