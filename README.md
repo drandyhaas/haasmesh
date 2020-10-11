@@ -1,6 +1,8 @@
 # haasmesh
 Scripts and other files for the Haas Mesh OpenWRT system
 
+Documentation: https://docs.google.com/document/d/1TnzFl1mKHkWIbcUVCAEKZYzHnerIYOiiUq8j5ZDTStQ/edit?usp=sharing
+
 To add to openWRT build:
 <pre>
 cd openwrt
