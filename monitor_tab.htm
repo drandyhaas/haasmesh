@@ -1,14 +1,12 @@
 <%+header%>                                                                    
 <h2><%:Maxwell Mesh Monitor%></h2>
-<br>
-<!-- <p><h3><a href="../system/commands"> Commands page </a></h3></p> -->
 
 <h3>Mesh nodes and internet connection <input id="buttonNodes" type="button" onclick="noderefresh()"> </h3>
 <p id="internet">Internet connection status will go here</p>
 <p id="nodes">Nodes will go here</p>
 <br>
 
-<h3>Test download of 10 MB from internet <input id="buttonDownload" type="button" onclick="myDownload()" value="Run"> </h3>
+<h3>Test download from internet <input id="buttonDownload" type="button" onclick="myDownload()" value="Run"> </h3>
 <pre id="download">Test download result here</pre>
 <br>
 
@@ -16,7 +14,7 @@
 <pre id="speedtest">Speedtest result here</pre>
 <br>
 
-<h3>Bandwidth between me and each node <input type="button" onclick="myBandwidth()" value="Run"> </h3>
+<h3>Bandwidth between me and nodes <input type="button" onclick="myBandwidth()" value="Run"> </h3>
 <pre id="bandwidth">Bandwidth result here</pre>
 
 <br>
@@ -40,10 +38,14 @@
 <form>
   <label for="nodepass">Root Login Password:</label>
   <input type="text" id="nodepass" value=""> <input type="button" value="Change Root Login Password" onclick="changenodepass()"><br><br>
-  <label for="apchange">Access Point SSID and Password:</label>
-  <input type="text" id="apssid" value=""> <input type="text" id="appass" value=""> <input type="button" value="Change Access Point SSID and Password" onclick="changeapssidpass()"><br><br>
-  <label for="messchange">Hidden Mesh Name and Password:</label>
-  <input type="text" id="meshname" value=""> <input type="text" id="meshpass" value=""> <input type="button" value="Change Hidden Mesh Name and Password" onclick="changemeshnamepass()"><br>
+
+  <label for="apchange">Access Point SSID:</label> <input type="text" id="apssid" value="">
+  <label for="apchange">and Password:</label> <input type="text" id="appass" value="">
+  <input type="button" value="Change Access Point SSID and Password" onclick="changeapssidpass()"><br><br>
+
+  <label for="messchange">Hidden Mesh Name:</label> <input type="text" id="meshname" value="">
+  <label for="apchange">and Password:</label> <input type="text" id="meshpass" value="">
+  <input type="button" value="Change Hidden Mesh Name and Password" onclick="changemeshnamepass()"><br>
 </form>
 <pre id="commandout">Command output here</pre>
 
