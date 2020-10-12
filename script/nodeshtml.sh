@@ -10,7 +10,7 @@ else
 fi
 
 pings=`for i in $allnodes ; do echo $i; /root/script/pingip.sh $i ; done | grep seq=0`
-
+allgood=1
 echo "<table><tr> <th>Node IP</th> <th>Mesh</th> <th>Ping</th> </tr>"
 for n in $allnodes; do
   echo "<tr><th>"
@@ -24,15 +24,16 @@ for n in $allnodes; do
 
   echo "</th><th>"
   echo "${nodes}" | grep -x $n >/dev/null
-  if [ $? -eq 1 ]; then echo "<span class="reddot" onclick=\"removeNode(${nn})\"></span>";
+  if [ $? -eq 1 ]; then echo "<span class="reddot" onclick=\"removeNode(${nn})\"></span>"; allgood=0;
   else echo "<span class="greendot"></span>"; fi
 
   echo "</th><th>"
   echo $pings | grep "${n}:" >/dev/null
-  if [ $? -eq 1 ]; then echo "<span class="reddot" onclick=\"removeNode(${nn})\"></span>";
+  if [ $? -eq 1 ]; then echo "<span class="reddot" onclick=\"removeNode(${nn})\"></span>"; allgood=0;
   else echo "<span class="greendot"></span>"; fi
 
   echo "</th></tr>"
 done
 echo "</table>"
-echo "Click on a red mesh dot to remove the node from the list"
+echo "Status as of `date`."
+if [ $allgood -eq 0 ]; then echo "<br>Click on a red mesh or ping dot to remove the node from the list."; fi
