@@ -37,25 +37,27 @@
 
 <br>
 <h3>Modify mesh node setup</h3>
-<form >
-  <label for="nodepass">Root Login Password:</label> 
-  <input type="text" id="nodepass" value=""> <input type="button" value="Change Root Login Password" onclick="changenodepass()" ><br><br>
-  <label for="apchange">Access Point SSID and Password:</label> 
-  <input type="text" id="apssid" value="">  <input type="text" id="appass" value=""> <input type="button" value="Change Access Point SSID and Password" onclick="changeapssidpass()" ><br><br>
-  <label for="messchange">Hidden Mesh Name and Password:</label> 
-  <input type="text" id="meshname" value="">  <input type="text" id="meshpass" value=""> <input type="button" value="Change Hidden Mesh Name and Password" onclick="changemeshnamepass()" ><br>
+<form>
+  <label for="nodepass">Root Login Password:</label>
+  <input type="text" id="nodepass" value=""> <input type="button" value="Change Root Login Password" onclick="changenodepass()"><br><br>
+  <label for="apchange">Access Point SSID and Password:</label>
+  <input type="text" id="apssid" value=""> <input type="text" id="appass" value=""> <input type="button" value="Change Access Point SSID and Password" onclick="changeapssidpass()"><br><br>
+  <label for="messchange">Hidden Mesh Name and Password:</label>
+  <input type="text" id="meshname" value=""> <input type="text" id="meshpass" value=""> <input type="button" value="Change Hidden Mesh Name and Password" onclick="changemeshnamepass()"><br>
 </form>
 <pre id="commandout">Command output here</pre>
 
 <br>
 <h3>Other misc setup</h3>
-<form >
+<form>
   <input type="button" value="Update these scripts from github" onclick="updatehaasmesh()"> <input type="button" value="Rotate Luma ethernet ports" onclick="rotatelumaeth()">
   <br>
 </form>
 <pre id="othercommandout">Command output here</pre>
 
 <br>
+
+Maxwell mesh wifi is open-source, by DrAndyHaas. <a href="https://github.com/drandyhaas/haasmesh">All code available in github here.</a>
 
 <script>
 window.onload = onLoad();
@@ -101,9 +103,9 @@ function changemeshnamepass(){
 }
 
 function myNodes() {
-  document.getElementById("internet").innerHTML="working...";
+  //document.getElementById("internet").innerHTML="working...";
   postcmd("/root/script/internethtml.sh","internet");
-  document.getElementById("nodes").innerHTML="working...";
+  //document.getElementById("nodes").innerHTML="working...";
   postcmd("/root/script/nodeshtml.sh","nodes");
 }
 function removeNode(n) {
