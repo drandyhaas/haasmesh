@@ -84,6 +84,10 @@ echo "fixing backhaul mac address" # to stop "received packet on bat0 with own a
 batethmac=`ifconfig | grep HW | grep \`uci get network.bat_eth.ifname\` |cut -d ":" -f 3-|sed 's% %%g'`
 uci set network.bat_eth.macaddr="00:${batethmac}"
 
+echo "setting hostname"
+myipshort=`echo $myip | cut -f 4 -d . `
+uci set system.@system[0].hostname="MaxwellMesh_$myipshort"
+
 echo "committing changes and restarting iface"
 uci changes
 uci commit
