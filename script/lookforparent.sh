@@ -12,7 +12,7 @@ if [ $? -eq 0 ]; then
   wget 192.168.2.1/allnodes.txt
   if [ -f allnodes.txt ]; then
     PARENT=2 # I'm the child of a local dhcp server, so I'm a node
-    for i in $(seq 2 17) ; do grep -x 192.168.2.$i allnodes.txt > /dev/null ; if [ $? -eq 1 ]; then echo "192.168.2.$i not found "; myip="192.168.2.${i}"; break; fi; done
+    for i in $(seq 2 17) ; do grep -x "192\.168\.2\.$i" allnodes.txt > /dev/null ; if [ $? -eq 1 ]; then echo "192.168.2.$i not found "; myip="192.168.2.${i}"; break; fi; done
     echo "based on allnodes.txt, using ip \"${myip}\""
     wget -O - "http://192.168.2.1/cgi-bin/newhaasnode?newhaasnodeip=${myip}&extra=0" # tell the server about me
     rm -f allnodes.txt
@@ -22,7 +22,7 @@ if [ $PARENT -eq 0 ]; then
   #if we can't get a local IP from DHCP, then maybe we're a hub
   #see if we have an address on WAN interface, like we're plugged into a router/modem
 
-  ifconfig |grep -v Scope |grep -v 192.168.2. | grep -v 127.0.0.1 | grep -c inet > Nips.txt
+  ifconfig |grep -v Scope |grep -v "192\.168\.2\." | grep -v "127\.0\.0\.1" | grep -c inet > Nips.txt
   if [ `cat Nips.txt` != 0 ]; then
     PARENT=1
   fi
