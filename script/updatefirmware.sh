@@ -35,7 +35,7 @@ wget -q --no-check-certificate https://www.dropbox.com/s/ma18jja6zi5na8a/openwrt
 upfile="/tmp/openwrt-ipq40xx-generic-luma_wrtq-329acn-squashfs-sysupgrade.bin"
 fi
 
-echo "Upgrading with -v $1 in 10 seconds"
-(sleep 10 && sysupgrade -v $1 $upfile && echo "date `date`">/tmp/updatefirmware.txt ) &
+echo "Upgrading with -v $1 in 30 seconds"
+(sleep 30 && sysupgrade -v $1 $upfile > /tmp/updatefirmware.txt && echo "date `date`">/tmp/updatefirmwaredate.txt ) &
 
 cd -
