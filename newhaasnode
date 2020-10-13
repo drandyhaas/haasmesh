@@ -25,7 +25,7 @@ if [ `echo $myip | cut -f 4 -d . ` -eq 1 ]; then
   cat /www/allnodes.txt
 
   #flush the arp cache of 192.168.2.19, every 10 seconds, for 2 minutes, since 192.168.2.19 has now become some other IP, and we want to be able to add a new node at 192.168.2.19 and have it connect to us
-  /root/script/arpflush.sh
+  /root/script/arpflush.sh > /www/arpflush.txt &
 fi
 
 echo "</pre>"
