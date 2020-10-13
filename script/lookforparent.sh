@@ -25,6 +25,7 @@ if [ $PARENT -eq 0 ]; then
   ifconfig |grep -v Scope |grep -v "192\.168\.2\." | grep -v "127\.0\.0\.1" | grep -c inet > Nips.txt
   if [ `cat Nips.txt` != 0 ]; then
     PARENT=1
+    myip="192.168.2.1"
   fi
   rm Nips.txt
 fi
