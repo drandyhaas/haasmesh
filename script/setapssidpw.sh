@@ -5,8 +5,8 @@ if [ `expr length $2` -lt 8 ]; then echo "pw too short - has to be at least 8 ch
 if [ `/root/script/myip.sh | cut -f 4 -d . ` -eq 1 ]; then
 echo "master hub"
 
-#for n in 19; do n="192.168.2.$n"
 for n in `/root/script/nodes.sh`; do
+   if [ $n == "192.168.2.19" ]; then echo "skipping 192.168.2.19"; continue; fi # don't try to do this dummy node
    echo "Setting ssid to \"${1}\" and pw to \"${2}\" for node $n "
    ssh $n "uci set wireless.ap_2g_1.ssid=\"${1}\"; uci set wireless.ap_2g_1.key=\"${2}\"; uci set wireless.ap_5g_1.ssid=\"${1}\"; uci set wireless.ap_5g_1.key=\"${2}\"; uci set wireless.ap_5g_2.ssid=\"${1}\"; uci set wireless.ap_5g_2.key=\"${2}\";uci commit; /root/script/wifi10s.sh &"
 done
