@@ -35,6 +35,17 @@ wget -q --no-check-certificate https://www.dropbox.com/s/ma18jja6zi5na8a/openwrt
 upfile="/tmp/openwrt-ipq40xx-generic-luma_wrtq-329acn-squashfs-sysupgrade.bin"
 fi
 
+if dmesg|grep -q "Wavlink WL-WN531A6"; then
+echo "Getting Wavlink WL-WN531A6 firmware"
+wget -q --no-check-certificate https://www.dropbox.com/s/aumhhccy9qbdfxs/openwrt-ramips-mt7621-wavlink_wl-wn531a6-squashfs-sysupgrade.bin
+upfile="/tmp/openwrt-ramips-mt7621-wavlink_wl-wn531a6-squashfs-sysupgrade.bin"
+fi
+if dmesg|grep -q "Xiaomi Redmi Router AC2100"; then
+echo "Getting Xiaomi Redmi Router AC2100 firmware"
+wget -q --no-check-certificate https://www.dropbox.com/s/dzkgrcm3cgdzkzf/openwrt-ramips-mt7621-xiaomi_redmi-router-ac2100-squashfs-sysupgrade.bin
+upfile="/tmp/openwrt-ramips-mt7621-xiaomi_redmi-router-ac2100-squashfs-sysupgrade.bin"
+fi
+
 echo "Upgrading with -v $1 in 30 seconds"
 (sleep 30 && sysupgrade -v $1 $upfile > /tmp/updatefirmware.txt && echo "date `date`">/tmp/updatefirmwaredate.txt ) &
 
