@@ -11,10 +11,10 @@ else
 
       echo "Installing python and speedtest"
       echo "running" > /tmp/speedtestlock
-      ( opkg update && opkg install python3-pip && pip install speedtest-cli && rm /tmp/speedtestlock ) &> /root/speedtest.log &
+      ( opkg update && opkg install python3-pip && pip3 install speedtest-cli && rm /tmp/speedtestlock ) &> /root/speedtest.log &
 
       #To uninstall:
-      #pip uninstall speedtest-cli
+      #pip3 uninstall speedtest-cli
       #opkg remove python* 
       #opkg remove python* 
       #opkg remove python* 
