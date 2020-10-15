@@ -9,7 +9,6 @@ while true; do
   #restart alfred and batadv-vis
   killall alfred
   killall batadv-vis
-  kill `ps|grep alf|grep -v grep|cut -d r -f 1`
   if [ `/root/script/myip.sh | cut -f 4 -d . ` -eq 1 ]; then
     echo "master hub"
     ALFREDMASTER="-m "
