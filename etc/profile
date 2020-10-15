@@ -14,6 +14,7 @@ export HOME=$(grep -e "^${USER:-root}:" /etc/passwd | cut -d ":" -f 6)
 export HOME=${HOME:-/root}
 
 ###########HAAS
+alias gd="git diff|less"
 #export PS1='\u@\h:\w\$ '
 THEIP=`/root/script/myip.sh`
 PS1="\[\033[01;31m\]\u@"$THEIP" \w $\[\033[00m\] ";
