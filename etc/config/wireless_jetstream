@@ -47,7 +47,6 @@ config wifi-iface 'ap_5g_1'
         option ieee80211r '1'
         option ft_over_ds '1'
         option ft_psk_generate_local '1'
-        option disabled '1'
 
 config wifi-device 'radio2'
 	option type 'mac80211'
