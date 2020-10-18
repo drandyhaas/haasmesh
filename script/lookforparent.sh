@@ -91,6 +91,8 @@ echo "setting hostname"
 myipshort=`echo $myip | cut -f 4 -d . `
 uci set system.@system[0].hostname="MaxwellMesh_$myipshort"
 
+uci set luci.sauth.sessiontime='360000' # to change session root auth timeout
+
 echo "committing changes and restarting iface"
 uci changes
 uci commit
