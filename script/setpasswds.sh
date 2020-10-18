@@ -27,5 +27,5 @@ done
 else
 echo "just a node"
 echo "Setting pw to \"${1}\" for me"
-printf \"${1}\n${1}\n\" | passwd
+printf "${1}\n${1}\n" | passwd
 fi
