@@ -50,20 +50,24 @@ config interface 'wan6'
 
 config device
         option name lan1
-        option mtu 1600
+        option mtu 1560
 
 config device
         option name lan2
-        option mtu 1600
+        option mtu 1560
+
+config device
+        option name eth0
+        option mtu 1560
 
 config interface 'bat_eth'
-        option mtu '1600'
+        option mtu '1560'
         option proto 'batadv_hardif'
         option master 'bat0'
         option ifname 'lan1'
 
 config interface 'bat_eth2'
-        option mtu '1600'
+        option mtu '1560'
         option proto 'batadv_hardif'
         option master 'bat0'
         option ifname 'lan2'
