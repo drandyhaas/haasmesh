@@ -13,7 +13,7 @@ if dmesg|grep -q "TP-Link Archer C7 v5"; then
 led="none"
 fi
 if dmesg|grep -q "TP-Link Archer A7 v5"; then
-led="/sys/class/leds/tp-link\:green\:wps"
+led=/sys/class/leds/tp-link\:green\:wps
 fi
 if dmesg|grep -q "Linksys EA8300"; then
 led="none"
