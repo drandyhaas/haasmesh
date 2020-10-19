@@ -117,6 +117,7 @@ function removeNode(n) {
   }
 }
 function flashNode(n) {
+  document.getElementById("othercommandout").innerHTML="Trying to flash LED on node "+n+"...";
   postcmd("/root/script/flashlednode.sh "+n,"othercommandout");
 }
 
