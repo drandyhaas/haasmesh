@@ -24,6 +24,9 @@ fi
 if dmesg|grep -q "Wavlink WL-WN531A6"; then
 led=/sys/class/leds/blue\:wifi2g
 fi
+if dmesg|grep -q "Xiaomi Redmi Router AC2100"; then
+led=/sys/class/leds/white\:status
+fi
 
 if dmesg|grep -q "Luma WRTQ-329ACN"; then
 led="none"
