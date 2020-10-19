@@ -25,12 +25,12 @@ for n in $allnodes; do
   echo "</th><th>"
   echo "${nodes}" | grep -x $n >/dev/null
   if [ $? -eq 1 ]; then echo "<span class="reddot" onclick=\"removeNode(${nn})\"></span>"; allgood=0;
-  else echo "<span class="greendot"></span>"; fi
+  else echo "<span class="greendot" onclick=\"flashNode(${nn})\"></span>"; fi
 
   echo "</th><th>"
   echo $pings | grep "${n}:" >/dev/null
   if [ $? -eq 1 ]; then echo "<span class="reddot" onclick=\"removeNode(${nn})\"></span>"; allgood=0;
-  else echo "<span class="greendot"></span>"; fi
+  else echo "<span class="greendot" onclick=\"flashNode(${nn})\"></span>"; fi
 
   echo "</th></tr>"
 done

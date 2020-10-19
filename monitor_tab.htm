@@ -116,6 +116,9 @@ function removeNode(n) {
     //postcmd("/root/script/nodeshtml.sh","nodes");
   }
 }
+function flashNode(n) {
+  postcmd("/root/script/flashlednode.sh "+n,"othercommandout");
+}
 
 function myTraceall() {
   document.getElementById("traceall").innerHTML="working...";
