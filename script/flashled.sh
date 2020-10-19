@@ -6,29 +6,37 @@ else
  nsec=$1
 fi
 
-if dmesg|grep -q "TP-Link Archer C7 v2"; then
+if cat /sys/firmware/devicetree/base/model | grep -q "TP-Link Archer C7 v2"; then
+echo "C7 v2"
 led="none"
 fi
-if dmesg|grep -q "TP-Link Archer C7 v5"; then
+if cat /sys/firmware/devicetree/base/model | grep -q "TP-Link Archer C7 v5"; then
+echo "C7 v5"
 led="none"
 fi
-if dmesg|grep -q "TP-Link Archer A7 v5"; then
+if cat /sys/firmware/devicetree/base/model | grep -q "TP-Link Archer A7 v5"; then
+echo "A7 v5"
 led=/sys/class/leds/tp-link\:green\:wps
 fi
-if dmesg|grep -q "Linksys EA8300"; then
+if cat /sys/firmware/devicetree/base/model | grep -q "Linksys EA8300"; then
+echo "EA8300"
+led=/sys/class/leds/ea8300\:white\:wps
+fi
+if cat /sys/firmware/devicetree/base/model | grep -q "COMFAST CF-EW72"; then
+echo "EW72"
 led="none"
 fi
-if dmesg|grep -q "COMFAST CF-EW72"; then
-led="none"
-fi
-if dmesg|grep -q "Wavlink WL-WN531A6"; then
+if cat /sys/firmware/devicetree/base/model | grep -q "Wavlink WL-WN531A6"; then
+echo "Jetstream"
 led=/sys/class/leds/blue\:wifi2g
 fi
-if dmesg|grep -q "Xiaomi Redmi Router AC2100"; then
+if cat /sys/firmware/devicetree/base/model | grep -q "Xiaomi Redmi Router AC2100"; then
+echo "Redmi"
 led=/sys/class/leds/white\:status
 fi
 
-if dmesg|grep -q "Luma WRTQ-329ACN"; then
+if cat /sys/firmware/devicetree/base/model | grep -q "Luma WRTQ-329ACN"; then
+echo "Luma"
 led="none"
 echo "flashing luma led ring for 2x$nsec sec"
 for i in $(seq 0 $nsec); do
@@ -39,8 +47,8 @@ for i in $(seq 0 $nsec); do
 done
 fi
 
-if [ $led != "none" ]; then
-echo "flashing led for 2x$nsec sec"
+if [ "$led" != "none" ]; then
+echo "flashing led $led for 2x$nsec sec"
 echo none > $led/trigger
 for i in $(seq 0 $nsec); do
  echo 1 > $led/brightness
