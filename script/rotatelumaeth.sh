@@ -1,4 +1,4 @@
-if dmesg|grep -q "Machine model: Luma";  then 
+if cat /sys/firmware/devicetree/base/model | grep -q "Machine model: Luma";  then 
 echo "On a Luma - rotating eth ports"
 
 cd /etc/config

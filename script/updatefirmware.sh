@@ -9,43 +9,43 @@ getnew=1
 #assume not checking version
 docheck=1
 
-if dmesg|grep -q "TP-Link Archer C7 v2"; then
+if cat /sys/firmware/devicetree/base/model |grep -q "TP-Link Archer C7 v2"; then
 echo "Getting Archer C7 v2 firmware"
 filedir="https://www.dropbox.com/s/90ofp9s7llyrlxr"
 file="openwrt-ath79-generic-tplink_archer-c7-v2-squashfs-sysupgrade.bin"
 fi
-if dmesg|grep -q "TP-Link Archer C7 v5"; then
+if cat /sys/firmware/devicetree/base/model |grep -q "TP-Link Archer C7 v5"; then
 echo "Getting Archer C7 v5 firmware"
 filedir="https://www.dropbox.com/s/hb4qmjlduopgwyh"
 file="openwrt-ath79-generic-tplink_archer-c7-v5-squashfs-sysupgrade.bin"
 fi
-if dmesg|grep -q "TP-Link Archer A7 v5"; then
+if cat /sys/firmware/devicetree/base/model |grep -q "TP-Link Archer A7 v5"; then
 echo "Getting Archer A7 v5 firmware"
 filedir="https://www.dropbox.com/s/cs309z2h3mo46hn"
 file="openwrt-ath79-generic-tplink_archer-a7-v5-squashfs-sysupgrade.bin"
 fi
-if dmesg|grep -q "Linksys EA8300"; then
+if cat /sys/firmware/devicetree/base/model |grep -q "Linksys EA8300"; then
 echo "Getting Linksys EA8300 firmware"
 filedir="https://www.dropbox.com/s/n5q1o8bd6pezaic"
 file="openwrt-ipq40xx-generic-linksys_ea8300-squashfs-sysupgrade.bin"
 fi
-if dmesg|grep -q "COMFAST CF-EW72"; then
+if cat /sys/firmware/devicetree/base/model |grep -q "COMFAST CF-EW72"; then
 echo "Getting COMFAST EW72 firmware"
 filedir="https://www.dropbox.com/s/o3zmy96wxjp4v5m"
 file="openwrt-ath79-generic-comfast_cf-ew72-squashfs-sysupgrade.bin"
 fi
-if dmesg|grep -q "Luma WRTQ-329ACN"; then
+if cat /sys/firmware/devicetree/base/model |grep -q "Luma WRTQ-329ACN"; then
 echo "Getting Luma WRTQ-329ACN firmware"
 filedir="https://www.dropbox.com/s/ma18jja6zi5na8a"
 file="openwrt-ipq40xx-generic-luma_wrtq-329acn-squashfs-sysupgrade.bin"
 fi
-if dmesg|grep -q "Xiaomi Redmi Router AC2100"; then
+if cat /sys/firmware/devicetree/base/model |grep -q "Xiaomi Redmi Router AC2100"; then
 echo "Getting Xiaomi Redmi Router AC2100 firmware"
 filedir="https://www.dropbox.com/s/dzkgrcm3cgdzkzf"
 file="openwrt-ramips-mt7621-xiaomi_redmi-router-ac2100-squashfs-sysupgrade.bin"
 fi
 
-if dmesg|grep -q "Wavlink WL-WN531A6"; then
+if cat /sys/firmware/devicetree/base/model |grep -q "Wavlink WL-WN531A6"; then
 echo "Checking for new Wavlink WL-WN531A6 firmware"
 filedir="https://www.dropbox.com/s/aumhhccy9qbdfxs"
 file="openwrt-ramips-mt7621-wavlink_wl-wn531a6-squashfs-sysupgrade.bin"
