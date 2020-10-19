@@ -7,26 +7,27 @@ else
 fi
 
 if dmesg|grep -q "TP-Link Archer C7 v2"; then
-led=""
+led="none"
 fi
 if dmesg|grep -q "TP-Link Archer C7 v5"; then
-led=""
+led="none"
 fi
 if dmesg|grep -q "TP-Link Archer A7 v5"; then
-led=""
+led="none"
 fi
 if dmesg|grep -q "Linksys EA8300"; then
-led=""
+led="none"
 fi
 if dmesg|grep -q "COMFAST CF-EW72"; then
-led=""
+led="none"
 fi
 if dmesg|grep -q "Wavlink WL-WN531A6"; then
 led=/sys/class/leds/blue\:wifi2g
 fi
 
 if dmesg|grep -q "Luma WRTQ-329ACN"; then
-led=""
+led="none"
+echo "flashing luma led ring for 2x$nsec sec"
 for i in $(seq 0 $nsec); do
  i2cset -y 2 0x48 3 5 12 0 i # set luma led ring to solid purple bright
  sleep 1
@@ -35,7 +36,8 @@ for i in $(seq 0 $nsec); do
 done
 fi
 
-if [ led != "" ]; then
+if [ $led != "none" ]; then
+echo "flashing led for 2x$nsec sec"
 echo none > $led/trigger
 for i in $(seq 0 $nsec); do
  echo 1 > $led/brightness
