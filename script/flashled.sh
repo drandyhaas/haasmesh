@@ -24,7 +24,7 @@ led=/sys/class/leds/ea8300\:white\:wps
 fi
 if cat /sys/firmware/devicetree/base/model | grep -q "COMFAST CF-EW72"; then
 echo "EW72"
-led="none"
+led=/sys/class/leds/cf-ew72\:blue\:wlan
 fi
 if cat /sys/firmware/devicetree/base/model | grep -q "Wavlink WL-WN531A6"; then
 echo "Jetstream"
