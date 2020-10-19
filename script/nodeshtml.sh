@@ -3,9 +3,11 @@ nodes=`/root/script/nodes.sh`
 
 #the db of nodes is only kept on the hub
 if [ `echo $myip | cut -f 4 -d . ` -eq 1 ]; then
+  master=1
   /root/script/allnodes.sh # remake the file (also done in bathosts.sh periodically)
   allnodes=`cat /www/allnodes.txt | sort`
 else
+  master=0
   allnodes=`echo $nodes | sort`
 fi
 
@@ -37,3 +39,5 @@ done
 echo "</table>"
 echo "Status as of `date`."
 if [ $allgood -eq 0 ]; then echo "<br>Click on a red mesh or ping dot to remove the node from the list."; fi
+if [ $master -eq 1 ]; then echo "<br>Click on a green mesh or ping dot to flash the LED on that node."; fi
+
