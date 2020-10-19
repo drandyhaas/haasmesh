@@ -3,5 +3,5 @@
 
 iperf3 -s &
 /root/script/delayedmonstart.sh &
-i2cset -y 2 0x48 3 5 1 0 i # set luma led ring to solid purple dim
+/root/script/flashled.sh 1
 exit 0
