@@ -69,6 +69,7 @@ if [ $getnew -eq 1 ]; then
  echo "Getting new firmware $filedir/$file"
  wget -q --no-check-certificate $filedir/$file
  echo "Upgrading with -v $1 $file in 30 seconds"
+ sync
  (sleep 30 && sysupgrade -v $1 $file > /tmp/updatefirmware.txt && echo "date `date`">/tmp/updatefirmwaredate.txt ) &
 fi
 
