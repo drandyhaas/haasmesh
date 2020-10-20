@@ -16,7 +16,7 @@ config interface 'lan'
 	option ipaddr '192.168.2.19'
 	option gateway '192.168.2.1'
 	list dns '192.168.2.1'
-	option stp '1'
+	option stp '0'
 
 config interface 'bat0'
 	option proto 'batadv'
