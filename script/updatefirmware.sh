@@ -7,7 +7,7 @@ rm -f openwrt-*
 #assume we'll get the new firmware
 getnew=1
 #assume not checking version
-docheck=1
+docheck=0
 
 if cat /sys/firmware/devicetree/base/model |grep -q "TP-Link Archer C7 v2"; then
 echo "Getting Archer C7 v2 firmware"
@@ -66,7 +66,7 @@ if [ $docheck -eq 1 ]; then
 fi
 
 if [ $getnew -eq 1 ]; then 
- echo "Getting new firmware"
+ echo "Getting new firmware $filedir/$file"
  wget -q --no-check-certificate $filedir/$file
  echo "Upgrading with -v $1 $file in 30 seconds"
  (sleep 30 && sysupgrade -v $1 $file > /tmp/updatefirmware.txt && echo "date `date`">/tmp/updatefirmwaredate.txt ) &
