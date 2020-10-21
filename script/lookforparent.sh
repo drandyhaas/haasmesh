@@ -103,4 +103,9 @@ wifi reload
 /etc/init.d/dnsmasq restart
 echo "done finding parent"
 i2cset -y 2 0x48 3 5 2 0 i #for luma, dim solid purple
+
+#ip has changed, so may need to be master now
+killall alfred
+/root/script/myip.sh
+
 ash /etc/rc.local # restart some stuff
