@@ -5,7 +5,7 @@ echo "master hub"
 
 opkg list-installed | grep openssh-client-utils
 if [ $? -eq 1 ]; then 
-  opkg update
+  #opkg update
   opkg install openssh-client-utils
 fi
 
