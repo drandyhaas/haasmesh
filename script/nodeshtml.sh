@@ -38,6 +38,10 @@ for n in $allnodes; do
 done
 echo "</table>"
 echo "Status as of `date`."
+
 if [ $allgood -eq 0 ]; then echo "<br>Click on a red mesh or ping dot to remove the node from the list."; fi
-if [ $master -eq 1 ]; then echo "<br>Click on a green mesh or ping dot to flash the LED on that node."; fi
+
+if [ $master -eq 1 ]; then echo "<br>Click on a green mesh or ping dot to flash the LED on that node."
+else echo "<br>Click on my green mesh or ping dot to flash my LED."
+fi
 
