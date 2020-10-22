@@ -9,5 +9,5 @@ if [ `echo $myip | cut -f 4 -d . ` -eq 1 ]; then
     if [ $? -eq 1 ]; then echo $n >> /www/allnodes.txt; fi
   done
 fi
-cat /www/allnodes.txt |uniq > /tmp/allnodes
+cat /www/allnodes.txt |uniq | grep "^192\.168\.2\." > /tmp/allnodes
 cp /tmp/allnodes /www/allnodes.txt
