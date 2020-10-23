@@ -1,6 +1,14 @@
 myip=`/root/script/myip.sh`
 nodes=`/root/script/nodes.sh`
 
+#restart alfredinfo if it's gone for some reason
+if [ `ps|grep -c alfredinfo` -eq 2 ]; then
+  true; #echo "alfredinfo already running"
+else
+  #echo "start alfredinfo"
+  /root/script/alfredinfo.sh &> /root/alfredinfo.log &
+fi
+
 #the db of nodes is only kept on the hub
 if [ `echo $myip | cut -f 4 -d . ` -eq 1 ]; then
   master=1
