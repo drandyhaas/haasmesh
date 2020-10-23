@@ -20,7 +20,13 @@ led=/sys/class/leds/tp-link\:green\:wps
 fi
 if cat /sys/firmware/devicetree/base/model | grep -q "Linksys EA8300"; then
 echo "EA8300"
-led=/sys/class/leds/ea8300\:white\:wps
+ if [ -f /sys/class/leds/ea8300:white:wps/brightness ]; then
+  led=/sys/class/leds/ea8300\:white\:wps
+  echo none > /sys/class/leds/ea8300\:white\:linksys/trigger
+else
+  led=/sys/class/leds/white\:wps
+  echo none > /sys/class/leds/white\:linksys/trigger
+ fi
 fi
 if cat /sys/firmware/devicetree/base/model | grep -q "COMFAST CF-EW72"; then
 echo "EW72"
