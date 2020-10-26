@@ -1,5 +1,5 @@
 #git clone https://github.com/drandyhaas/haasmesh.git
-if [ $# -eq 0 ]; then rm -rf files; else echo "not removing files/";fi
+if [ $# -eq 1 ]; then rm -rf files; else echo "not removing files/";fi
 mkdir -p files/etc
 cp -r haasmesh/etc/* files/etc/
 cp haasmesh/etc/config/wireless_$1 files/etc/config/wireless
