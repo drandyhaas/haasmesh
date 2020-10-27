@@ -1,6 +1,16 @@
 # Put your custom commands here that should be executed once
 # the system init finished. By default this file does nothing.
 
+if cat /sys/firmware/devicetree/base/model |grep -q "Linksys EA8300"; then
+  echo "Setting fixed cpu freq for Linksys EA8300"
+  cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_cur_freq
+  #echo 500000 > /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
+  #echo 500000 > /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq
+  echo 716000 > /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
+  echo 716000 > /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq
+  cat /sys/devices/system/cpu/cpufreq/policy0/cpuinfo_cur_freq
+fi
+
 iperf3 -s &
 /root/script/delayedmonstart.sh &
 exit 0
