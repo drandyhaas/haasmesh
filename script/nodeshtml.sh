@@ -2,10 +2,10 @@ myip=`/root/script/myip.sh`
 nodes=`/root/script/nodes.sh`
 
 #restart alfredinfo if it's gone for some reason
-if [ `ps|grep -c alfredinfo` -eq 2 ]; then
+if [ `ps|grep -c alfredinfo` -gt 1 ]; then
   true; #echo "alfredinfo already running"
 else
-  #echo "start alfredinfo"
+  echo "restart alfredinfo"
   /root/script/alfredinfo.sh &> /root/alfredinfo.log &
 fi
 
