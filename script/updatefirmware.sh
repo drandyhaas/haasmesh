@@ -40,9 +40,12 @@ filedir="https://www.dropbox.com/s/ma18jja6zi5na8a"
 file="openwrt-ipq40xx-generic-luma_wrtq-329acn-squashfs-sysupgrade.bin"
 fi
 if cat /sys/firmware/devicetree/base/model |grep -q "Xiaomi Redmi Router AC2100"; then
-echo "Getting Xiaomi Redmi Router AC2100 firmware"
+echo "Checking for new Xiaomi Redmi Router AC2100 firmware"
 filedir="https://www.dropbox.com/s/dzkgrcm3cgdzkzf"
 file="openwrt-ramips-mt7621-xiaomi_redmi-router-ac2100-squashfs-sysupgrade.bin"
+vfiledir="https://www.dropbox.com/s/p5jgqgnek75pb19/"
+vfile="openwrt-ramips-mt7621-xiaomi_redmi-router-ac2100-squashfs-sysupgrade.version.txt"
+docheck=1
 fi
 
 if cat /sys/firmware/devicetree/base/model |grep -q "Wavlink WL-WN531A6"; then
@@ -56,12 +59,12 @@ fi
 
 if [ $docheck -eq 1 ]; then
  wget -q --no-check-certificate $vfiledir/$vfile
- if diff $vfile /www/sysupgrade.version.txt; then
+ if diff $vfile /etc/sysupgrade.version.txt; then
   rm $vfile
   echo "No new firmware"
   getnew=0
  else
-  mv -v $vfile /www/sysupgrade.version.txt
+  mv -v $vfile /etc/sysupgrade.version.txt
  fi
 fi
 
