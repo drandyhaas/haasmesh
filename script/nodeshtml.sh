@@ -45,7 +45,7 @@ for n in $allnodes; do
   echo "</th></tr>"
 done
 echo "</table>"
-echo "Status as of `date`."
+echo -n "Status as of `date`, code version 1.01."
 
 if [ $allgood -eq 0 ]; then echo "<br>Click on a red mesh or ping dot to remove the node from the list."; fi
 
