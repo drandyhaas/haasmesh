@@ -59,12 +59,12 @@ fi
 
 if [ $docheck -eq 1 ]; then
  wget -q --no-check-certificate $vfiledir/$vfile
- if diff $vfile /etc/sysupgrade.version.txt; then
+ if diff $vfile /etc/config/sysupgrade.version.txt; then
   rm $vfile
   echo "No new firmware"
   getnew=0
  else
-  mv -v $vfile /etc/sysupgrade.version.txt
+  mv -v $vfile /etc/config/sysupgrade.version.txt
  fi
 fi
 
