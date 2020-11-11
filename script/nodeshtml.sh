@@ -45,7 +45,8 @@ for n in $allnodes; do
   echo "</th></tr>"
 done
 echo "</table>"
-echo -n "Status as of `date`, code version 1.01."
+echo -n "Status as of `date`, script code version 1.01, firmware built on "
+cat /etc/config/sysupgrade.version.txt
 
 if [ $allgood -eq 0 ]; then echo "<br>Click on a red mesh or ping dot to remove the node from the list."; fi
 
