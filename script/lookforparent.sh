@@ -88,6 +88,10 @@ if /root/script/model.sh |grep -q "Wavlink WL-WN531A6"; then
  uci set network.d_lan1.macaddr="00:${batethmac}"
  uci set network.d_lan2.macaddr="00:${batethmac}"
 fi
+if /root/script/model.sh |grep -q "Xiaomi Redmi Router AC2100"; then
+ uci set network.d_lan2.macaddr="00:${batethmac}"
+ uci set network.d_lan3.macaddr="00:${batethmac}"
+fi
 
 echo "setting hostname"
 myipshort=`echo $myip | cut -f 4 -d . `
