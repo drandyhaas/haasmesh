@@ -41,11 +41,11 @@ config interface 'bat_mesh0'
 	option master 'bat0'
 
 config interface 'wan'
-	option ifname 'switch0.3'
+	option ifname 'wan'
 	option proto 'dhcp'
 
 config interface 'wan6'
-	option ifname 'switch0.3'
+	option ifname 'wan'
 	option proto 'dhcpv6'
 
 config device
@@ -81,8 +81,4 @@ config dsa_vlan
 config dsa_vlan
         option vlan '2'
         option ports 'lan1 lan2'
-
-config dsa_vlan
-        option vlan '3'
-        option ports 'wan'
 
