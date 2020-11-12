@@ -1,3 +1,4 @@
+
 config interface 'loopback'
 	option ifname 'lo'
 	option proto 'static'
@@ -9,7 +10,7 @@ config globals 'globals'
 
 config interface 'lan'
 	option type 'bridge'
-	option ifname 'bat0 switch0.1'
+	option ifname 'bat0 lan3 lan4'
 	option proto 'static'
 	option netmask '255.255.255.0'
 	option ip6assign '60'
@@ -48,37 +49,27 @@ config interface 'wan6'
 	option ifname 'wan'
 	option proto 'dhcpv6'
 
-config device
-        option name lan1
-        option mtu 1560
+config device 'd_lan1'
+	option name 'lan1'
+	option mtu '1560'
 
-config device
-        option name lan2
-        option mtu 1560
+config device 'd_lan2'
+	option name 'lan2'
+	option mtu '1560'
 
-config device
-        option name eth0
-        option mtu 1560
-
-config device
-        option name 'switch0'
-        option mtu '1560'
-
-config device
-        option name 'switch0.2'
-        option mtu '1560'
+config device 'd_eth0'
+	option name 'eth0'
+	option mtu '1560'
 
 config interface 'bat_eth'
-        option mtu '1560'
-        option proto 'batadv_hardif'
-        option master 'bat0'
-        option ifname 'switch0.2'
+	option mtu '1560'
+	option proto 'batadv_hardif'
+	option master 'bat0'
+	option ifname 'lan1'
 
-config dsa_vlan
-        option vlan '1'
-        option ports 'lan3 lan4'
-
-config dsa_vlan
-        option vlan '2'
-        option ports 'lan1 lan2'
+config interface 'bat_eth2'
+	option mtu '1560'
+	option proto 'batadv_hardif'
+	option master 'bat0'
+	option ifname 'lan2'
 
