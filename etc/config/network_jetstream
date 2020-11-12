@@ -60,6 +60,14 @@ config device
         option name eth0
         option mtu 1560
 
+config device
+        option name 'switch0'
+        option mtu '1560'
+
+config device
+        option name 'switch0.2'
+        option mtu '1560'
+
 config interface 'bat_eth'
         option mtu '1560'
         option proto 'batadv_hardif'
