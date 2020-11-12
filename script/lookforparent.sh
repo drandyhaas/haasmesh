@@ -84,8 +84,6 @@ done # looping until we find a parent
 echo "fixing backhaul mac address(es)" # to stop "received packet on bat0 with own address as source address" warnings
 batethmac=`ifconfig | grep HW | grep ^\`uci get network.bat_eth.ifname\` |cut -d ":" -f 3-|sed 's% %%g'`
 uci set network.bat_eth.macaddr="00:${batethmac}"
-batethmac=`ifconfig | grep HW | grep ^\`uci get network.bat_eth2.ifname\` |cut -d ":" -f 3-|sed 's% %%g'`
-uci set network.bat_eth2.macaddr="00:${batethmac}"
 
 echo "setting hostname"
 myipshort=`echo $myip | cut -f 4 -d . `

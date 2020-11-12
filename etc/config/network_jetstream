@@ -9,7 +9,7 @@ config globals 'globals'
 
 config interface 'lan'
 	option type 'bridge'
-	option ifname 'bat0 lan3 lan4'
+	option ifname 'bat0 switch0.1'
 	option proto 'static'
 	option netmask '255.255.255.0'
 	option ip6assign '60'
@@ -41,11 +41,11 @@ config interface 'bat_mesh0'
 	option master 'bat0'
 
 config interface 'wan'
-	option ifname 'wan'
+	option ifname 'switch0.3'
 	option proto 'dhcp'
 
 config interface 'wan6'
-	option ifname 'wan'
+	option ifname 'switch0.3'
 	option proto 'dhcpv6'
 
 config device
@@ -64,11 +64,17 @@ config interface 'bat_eth'
         option mtu '1560'
         option proto 'batadv_hardif'
         option master 'bat0'
-        option ifname 'lan1'
+        option ifname 'switch0.2'
 
-config interface 'bat_eth2'
-        option mtu '1560'
-        option proto 'batadv_hardif'
-        option master 'bat0'
-        option ifname 'lan2'
+config dsa_vlan
+        option vlan '1'
+        option ports 'lan3 lan4'
+
+config dsa_vlan
+        option vlan '2'
+        option ports 'lan1 lan2'
+
+config dsa_vlan
+        option vlan '3'
+        option ports 'wan'
 
