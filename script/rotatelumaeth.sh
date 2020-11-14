@@ -1,4 +1,4 @@
-if cat /sys/firmware/devicetree/base/model | grep -q "Luma WRTQ-329ACN";  then 
+if cat /sys/firmware/devicetree/base/model | grep -q "WRTQ-329ACN";  then 
 echo "On a Luma - rotating eth ports"
 
 cd /etc/config
