@@ -34,7 +34,7 @@ echo "Getting COMFAST EW72 firmware"
 filedir="https://www.dropbox.com/s/o3zmy96wxjp4v5m"
 file="openwrt-ath79-generic-comfast_cf-ew72-squashfs-sysupgrade.bin"
 fi
-if cat /sys/firmware/devicetree/base/model |grep -q "Luma WRTQ-329ACN"; then
+if cat /sys/firmware/devicetree/base/model |grep -q "WRTQ-329ACN"; then
 echo "Getting Luma WRTQ-329ACN firmware"
 filedir="https://www.dropbox.com/s/ma18jja6zi5na8a"
 file="openwrt-ipq40xx-generic-luma_wrtq-329acn-squashfs-sysupgrade.bin"

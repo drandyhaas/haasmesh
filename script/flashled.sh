@@ -41,7 +41,7 @@ echo "Redmi"
 led=/sys/class/leds/white\:status
 fi
 
-if cat /sys/firmware/devicetree/base/model | grep -q "Luma WRTQ-329ACN"; then
+if cat /sys/firmware/devicetree/base/model | grep -q "WRTQ-329ACN"; then
 echo "Luma"
 led="none"
 echo "flashing luma led ring for 2x$nsec sec"
