@@ -28,16 +28,22 @@ if cat /sys/firmware/devicetree/base/model |grep -q "Linksys EA8300"; then
 echo "Getting Linksys EA8300 firmware"
 filedir="https://www.dropbox.com/s/n5q1o8bd6pezaic"
 file="openwrt-ipq40xx-generic-linksys_ea8300-squashfs-sysupgrade.bin"
+vfiledir="https://www.dropbox.com/s/yw6isf476o872ds/"
+vfile="openwrt-ipq40xx-generic-linksys_ea8300-squashfs-sysupgrade.version.txt"
+docheck=1
 fi
 if cat /sys/firmware/devicetree/base/model |grep -q "COMFAST CF-EW72"; then
 echo "Getting COMFAST EW72 firmware"
-filedir="https://www.dropbox.com/s/o3zmy96wxjp4v5m"
+filedir="https://www.dropbox.com/s/o3zmy96wxjp4v5m/"
 file="openwrt-ath79-generic-comfast_cf-ew72-squashfs-sysupgrade.bin"
 fi
 if cat /sys/firmware/devicetree/base/model |grep -q "WRTQ-329ACN"; then
 echo "Getting Luma WRTQ-329ACN firmware"
 filedir="https://www.dropbox.com/s/ma18jja6zi5na8a"
 file="openwrt-ipq40xx-generic-luma_wrtq-329acn-squashfs-sysupgrade.bin"
+vfiledir="https://www.dropbox.com/s/6ge8gvnx0cl3ciz/"
+vfile="openwrt-ipq40xx-generic-luma_wrtq-329acn-squashfs-sysupgrade.version.txt"
+docheck=1
 fi
 if cat /sys/firmware/devicetree/base/model |grep -q "Xiaomi Redmi Router AC2100"; then
 echo "Checking for new Xiaomi Redmi Router AC2100 firmware"
@@ -52,7 +58,7 @@ if cat /sys/firmware/devicetree/base/model |grep -q "Wavlink WL-WN531A6"; then
 echo "Checking for new Wavlink WL-WN531A6 firmware"
 filedir="https://www.dropbox.com/s/aumhhccy9qbdfxs"
 file="openwrt-ramips-mt7621-wavlink_wl-wn531a6-squashfs-sysupgrade.bin"
-vfiledir="https://www.dropbox.com/s/m4svlvmiuzin61j"
+vfiledir="https://www.dropbox.com/s/m4svlvmiuzin61j/"
 vfile="openwrt-ramips-mt7621-wavlink_wl-wn531a6-squashfs-sysupgrade.version.txt"
 docheck=1
 fi
