@@ -73,6 +73,6 @@ config switch_vlan
 config switch_vlan
 	option device 'switch0'
 	option vlan '102'
-	option ports '0t 1 2'
 	option vid '102'
+	option ports '0t 1 2'
 

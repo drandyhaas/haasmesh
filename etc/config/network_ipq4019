@@ -17,7 +17,7 @@ config interface 'lan'
         list dns '192.168.2.1'
         option stp '1'
         option ipaddr '192.168.2.19'
-	option ifname 'bat0 eth0'
+	option ifname 'bat0 eth0.101'
 
 config interface 'bat0'
 	option proto 'batadv'
@@ -49,7 +49,7 @@ config interface 'bat_eth'
 	option mtu '1600'
 	option proto 'batadv_hardif'
 	option master 'bat0'
-	option ifname 'eth2'
+	option ifname 'eth0.102'
 
 config interface 'wan'
 	option ifname 'eth1'
@@ -58,4 +58,21 @@ config interface 'wan'
 config interface 'wan6'
 	option ifname 'eth1'
 	option proto 'dhcpv6'
+
+config switch
+	option name 'switch0'
+	option reset '1'
+	option enable_vlan '1'
+
+config switch_vlan
+	option device 'switch0'
+	option vlan '101'
+	option vid '101'
+	option ports '0t 3 4'
+
+config switch_vlan
+	option device 'switch0'
+	option vlan '102'
+	option vid '102'
+	option ports '0t 1 2'
 
