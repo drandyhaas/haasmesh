@@ -9,19 +9,18 @@ config globals 'globals'
 	option ula_prefix 'fdb0:42d0:69f2::/48'
 
 config interface 'lan'
-	option type 'bridge'
-	option ifname 'bat0 lan1'
-	option proto 'static'
-	option netmask '255.255.255.0'
-	option ip6assign '60'
-	option ipaddr '192.168.2.19'
-	option gateway '192.168.2.1'
-	list dns '192.168.2.1'
-	option stp '1'
+        option type 'bridge'
+        option proto 'static'
+        option netmask '255.255.255.0'
+        option ip6assign '60'
+        option gateway '192.168.2.1'
+        list dns '192.168.2.1'
+        option stp '1'
+        option ipaddr '192.168.2.19'
+	option ifname 'bat0 eth0'
 
 config interface 'bat0'
 	option proto 'batadv'
-	option routing_algo 'BATMAN_IV'
 	option aggregated_ogms '1'
 	option ap_isolation '0'
 	option bonding '0'
@@ -35,41 +34,28 @@ config interface 'bat0'
 	option network_coding '0'
 	option hop_penalty '10'
 	option isolation_mark '0x00000000/0x00000000'
+	option routing_algo 'BATMAN_IV'
 
 config interface 'bat_mesh0'
 	option mtu '2304'
 	option proto 'batadv_hardif'
 	option master 'bat0'
 
+config device
+	option name eth0
+	option mtu 1600
+
+config interface 'bat_eth'
+	option mtu '1600'
+	option proto 'batadv_hardif'
+	option master 'bat0'
+	option ifname 'eth2'
+
 config interface 'wan'
-	option ifname 'wan'
+	option ifname 'eth1'
 	option proto 'dhcp'
 
 config interface 'wan6'
-	option ifname 'wan'
+	option ifname 'eth1'
 	option proto 'dhcpv6'
-
-config device 'd_lan2'
-	option name 'lan2'
-	option mtu '1560'
-
-config device 'd_lan3'
-	option name 'lan3'
-	option mtu '1560'
-
-config device 'd_eth0'
-	option name 'eth0'
-	option mtu '1560'
-
-config interface 'bat_eth'
-	option mtu '1560'
-	option proto 'batadv_hardif'
-	option master 'bat0'
-	option ifname 'lan2'
-
-config interface 'bat_eth2'
-	option mtu '1560'
-	option proto 'batadv_hardif'
-	option master 'bat0'
-	option ifname 'lan3'
 
