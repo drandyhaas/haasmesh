@@ -37,6 +37,13 @@ echo "Getting COMFAST EW72 firmware"
 filedir="https://www.dropbox.com/s/o3zmy96wxjp4v5m/"
 file="openwrt-ath79-generic-comfast_cf-ew72-squashfs-sysupgrade.bin"
 fi
+if cat /sys/firmware/devicetree/base/model | grep -q "Compex WPJ419 Haas"; then
+filedir="https://www.dropbox.com/s/wzu97fbm5hlams3/"
+file="openwrt-ipq40xx-generic-compex_wpj419-squashfs-nand-sysupgrade.bin"
+vfiledir="https://www.dropbox.com/s/zt19o7uk0iztotj/"
+vfile="openwrt-ipq40xx-generic-compex_wpj419-squashfs-nand-sysupgrade.version.txt"
+docheck=1
+fi
 if cat /sys/firmware/devicetree/base/model |grep -q "WRTQ-329ACN"; then
 echo "Getting Luma WRTQ-329ACN firmware"
 filedir="https://www.dropbox.com/s/ma18jja6zi5na8a"
