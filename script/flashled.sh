@@ -18,6 +18,7 @@ if cat /sys/firmware/devicetree/base/model | grep -q "TP-Link Archer A7 v5"; the
 echo "A7 v5"
 led=/sys/class/leds/tp-link\:green\:wps
 fi
+
 if cat /sys/firmware/devicetree/base/model | grep -q "Linksys EA8300"; then
 echo "EA8300"
  if [ -f /sys/class/leds/ea8300:white:wps/brightness ]; then
@@ -28,10 +29,18 @@ else
   echo none > /sys/class/leds/white\:linksys/trigger
  fi
 fi
+
 if cat /sys/firmware/devicetree/base/model | grep -q "COMFAST CF-EW72"; then
 echo "EW72"
 led=/sys/class/leds/cf-ew72\:blue\:wlan
 fi
+
+if cat /sys/firmware/devicetree/base/model | grep -q "Compex WPJ419 Haas"; then
+echo "IPQ4019 Haas"
+#led=/sys/class/leds/green\:usb
+led=/sys/class/leds/green\:wlan
+fi
+
 if cat /sys/firmware/devicetree/base/model | grep -q "Wavlink WL-WN531A6"; then
 echo "Jetstream"
 led=/sys/class/leds/blue\:wifi2g
@@ -63,3 +72,4 @@ for i in $(seq 0 $nsec); do
  sleep 1
 done
 fi
+
