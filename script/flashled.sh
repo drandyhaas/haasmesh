@@ -8,7 +8,7 @@ fi
 
 if cat /sys/firmware/devicetree/base/model | grep -q "TP-Link Archer C7 v2"; then
 echo "C7 v2"
-led="none"
+led=/sys/class/leds/tp-link\:green\:qss
 fi
 if cat /sys/firmware/devicetree/base/model | grep -q "TP-Link Archer C7 v5"; then
 echo "C7 v5"
