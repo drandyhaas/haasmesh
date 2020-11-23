@@ -160,13 +160,13 @@ function updatehaasmesh() {
 function factoryreset() {
   if (confirm("Do you really want to FACTORY RESET (on ALL NODES if this is a hub!)??!!")){ 
     document.getElementById("othercommandout").innerHTML="working...";
-    postcmd("/root/script/foreachnodeparallel.sh \" /root/script/factoryreset10s.sh \" ","othercommandout");
+    postcmd("/root/script/foreachnodeparallel.sh \" /root/script/factoryreset10s.sh & \" ","othercommandout");
   }
 }
 function rebootnode() {
   if (confirm("Do you really want to reboot (on ALL NODES if this is a hub!)?")){ 
     document.getElementById("othercommandout").innerHTML="working...";
-    postcmd("/root/script/foreachnodeparallel.sh \" /root/script/reboot10s.sh \" ","othercommandout");
+    postcmd("/root/script/foreachnodeparallel.sh \" /root/script/reboot10s.sh & \" ","othercommandout");
   }
 }
 function updatefirmware() {
