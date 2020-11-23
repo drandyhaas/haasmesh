@@ -12,7 +12,7 @@ led=/sys/class/leds/tp-link\:green\:qss
 fi
 if cat /sys/firmware/devicetree/base/model | grep -q "TP-Link Archer C7 v5"; then
 echo "C7 v5"
-led="none"
+led=/sys/class/leds/tp-link\:green\:wps
 fi
 if cat /sys/firmware/devicetree/base/model | grep -q "TP-Link Archer A7 v5"; then
 echo "A7 v5"
