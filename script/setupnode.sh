@@ -21,6 +21,7 @@ cp -r haasmesh/node_modules /www/
 ln -fs /root/haasmesh/dotbottom.html /www/dotbottom.html
 ln -fs /root/haasmesh/dottop.html /www/dottop.html
 cp haasmesh/index.html /www/
+cp haasmesh/keep.d/ssh /lib/upgrade/keep.d/
 cd -
 
 echo "starting monitoring"

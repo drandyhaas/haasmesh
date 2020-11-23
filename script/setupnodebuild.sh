@@ -12,3 +12,4 @@ cp -r haasmesh/springy files/www/
 cp -r haasmesh/node_modules files/www/
 cp haasmesh/dotbottom.html haasmesh/dottop.html files/www/
 cp haasmesh/index.html files/www/
+mkdir -p files/lib/upgrade/keep.d; cp haasmesh/keep.d/ssh files/lib/upgrade/keep.d/
