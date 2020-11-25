@@ -17,6 +17,14 @@ vfiledir="https://www.dropbox.com/s/un1zbih4952v68k/"
 vfile="openwrt-ath79-generic-tplink_archer-c7-v2-squashfs-sysupgrade.version.txt"
 docheck=1
 fi
+if cat /sys/firmware/devicetree/base/model |grep -q "TP-Link Archer C7 v4"; then
+echo "Getting Archer C7 v4 firmware"
+filedir="https://www.dropbox.com/s/h7wat4axo8ntczh"
+file="openwrt-ath79-generic-tplink_archer-c7-v4-squashfs-sysupgrade.bin"
+vfiledir="https://www.dropbox.com/s/7ud546nmmruxj0v/"
+vfile="openwrt-ath79-generic-tplink_archer-c7-v4-squashfs-sysupgrade.version.txt"
+docheck=1
+fi
 if cat /sys/firmware/devicetree/base/model |grep -q "TP-Link Archer C7 v5"; then
 echo "Getting Archer C7 v5 firmware"
 filedir="https://www.dropbox.com/s/hb4qmjlduopgwyh"
