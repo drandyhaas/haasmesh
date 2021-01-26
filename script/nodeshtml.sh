@@ -39,7 +39,7 @@ for n in $allnodes; do
 
   echo "</th><th>"
   echo $pings | grep "${n}:" >/dev/null
-  if [ $? -eq 1 ]; then echo "<span class="reddot" onclick=\"removeNode(${nn})\"></span>"; allgood=0;
+  if [ $? -eq 1 ]; then echo "<span class="reddot" onclick=\"removeNode(${nn})\"></span>"; allgood=0; echo `date +"[%m-%d %H:%M:%S]"` node_$nn >> /www/failedpings.txt
   else echo "<span class="greendot" onclick=\"flashNode(${nn})\"></span>"; fi
 
   echo "</th></tr>"
@@ -53,4 +53,9 @@ if [ $allgood -eq 0 ]; then echo "<br>Click on a red mesh or ping dot to remove 
 if [ $master -eq 1 ]; then echo "<br>Click on a green mesh or ping dot to flash the LED on that node."
 else echo "<br>Click on my green mesh or ping dot to flash my LED."
 fi
+
+echo "<br><a href="/failedpings.txt">Failed pings history</a>"
+touch /www/failedpings.txt
+if [ `wc -c /www/failedpings.txt |cut -d " " -f 1` -gt 10000 ]; then rm /www/failedpings.txt ; fi
+touch /www/failedpings.txt
 
