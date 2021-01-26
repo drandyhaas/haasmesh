@@ -54,8 +54,9 @@ if [ $master -eq 1 ]; then echo "<br>Click on a green mesh or ping dot to flash 
 else echo "<br>Click on my green mesh or ping dot to flash my LED."
 fi
 
-echo "<br><a href="/failedpings.txt">Failed pings history</a>"
+nf=`wc -l /www/failedpings.txt |cut -f 1 -d " "`
+echo "<br><a href="/failedpings.txt">Failed pings history: ${nf} failed pings</a>"
 touch /www/failedpings.txt
-if [ `wc -c /www/failedpings.txt |cut -d " " -f 1` -gt 10000 ]; then rm /www/failedpings.txt ; fi
+if [ $nf -gt 3000 ]; then rm /www/failedpings.txt ; echo " - Cleared failed pings file!"; fi
 touch /www/failedpings.txt
 
