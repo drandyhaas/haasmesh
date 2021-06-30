@@ -94,6 +94,15 @@ vfile="openwrt-ramips-mt7621-wavlink_wl-wn531a6-squashfs-sysupgrade.version.txt"
 docheck=1
 fi
 
+if cat /sys/firmware/devicetree/base/model |grep -q "Xiaomi AX3600"; then
+echo "Getting Xiaomi AX3600 firmware"
+filedir="https://www.dropbox.com/s/ysb0jdpz5gcv8hc/"
+file="openwrt-ipq807x-generic-xiaomi_ax3600-squashfs-nand-sysupgrade.bin"
+vfiledir="https://www.dropbox.com/s/8x91bz8iu0x0jai/"
+vfile="openwrt-ax3600-sysupgrade.version.txt"
+docheck=1
+fi
+
 if [ $docheck -eq 1 ]; then
  wget -q --no-check-certificate $vfiledir/$vfile
  if diff $vfile /etc/config/sysupgrade.version.txt; then
