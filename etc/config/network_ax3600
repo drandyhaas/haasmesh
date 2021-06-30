@@ -13,7 +13,9 @@ config device
 	option type 'bridge'
 	list ports 'bat0'
 	list ports 'eth3'
-
+   option stp '1'
+   option igmp_snooping '1'
+        
 config interface 'lan'
 	option device 'br-lan'
 	option proto 'static'
