@@ -1,9 +1,9 @@
 
 config interface 'loopback'
-	option ifname 'lo'
 	option proto 'static'
 	option ipaddr '127.0.0.1'
 	option netmask '255.0.0.0'
+	option device 'lo'
 
 config globals 'globals'
 	option ula_prefix 'fdb0:42d0:69f2::/48'
@@ -19,7 +19,7 @@ config interface 'lan'
 	option proto 'static'
 	option netmask '255.255.255.0'
 	option ip6assign '60'
-   option ipaddr '192.168.2.19'
+	option ipaddr '192.168.2.19'
 	option gateway '192.168.2.1'
 	list dns '192.168.2.1'
 
@@ -57,10 +57,11 @@ config interface 'bat_eth1'
 	option mtu '1560'
 	option proto 'batadv_hardif'
 	option master 'bat0'
-	option ifname 'eth1'
+	option device 'eth1'
 
 config interface 'bat_eth2'
 	option mtu '1560'
 	option proto 'batadv_hardif'
 	option master 'bat0'
-	option ifname 'eth2'
+	option device 'eth2'
+
