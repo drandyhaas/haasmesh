@@ -4,7 +4,7 @@ config wifi-device 'radio0'
 	option path 'soc/20000000.pci/pci0000:00/0000:00:00.0/0000:01:00.0'
 	option band '5g'
 	option htmode 'VHT80'
-	option channel 'auto'
+	option channel '149'
 	option cell_density '0'
 
 config wifi-iface 'mesh0'
