@@ -103,6 +103,15 @@ vfile="openwrt-ax3600-sysupgrade.version.txt"
 docheck=1
 fi
 
+if cat /sys/firmware/devicetree/base/model |grep -q "Linksys MR8300"; then # MR8300 is used for MR9000 device, EA8300 is used for MR8300 device
+echo "Getting Linksys MR9000 firmware"
+filedir="https://www.dropbox.com/s/n4668an40tf4hvc/"
+file="openwrt-ipq40xx-generic-linksys_mr9000-squashfs-sysupgrade.bin"
+vfiledir="https://www.dropbox.com/s/ic18e48qlgp3he4/"
+vfile="openwrt-ipq40xx-generic-linksys_mr9000-squashfs-sysupgrade.version.txt"
+docheck=1
+fi
+
 if [ $docheck -eq 1 ]; then
  wget -q --no-check-certificate $vfiledir/$vfile
  if diff $vfile /etc/config/sysupgrade.version.txt; then
