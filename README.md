@@ -3,6 +3,8 @@ Scripts and other files for the Haas Mesh OpenWRT system
 
 Documentation: https://tinyurl.com/MaxwellMeshDoc
 
+eBay: https://www.ebay.com/sch/i.html?_nkw=maxwell+mesh+wifi
+
 To add to openWRT build:
 <pre>
 cd openwrt
