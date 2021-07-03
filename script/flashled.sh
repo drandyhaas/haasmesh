@@ -34,6 +34,11 @@ else
  fi
 fi
 
+if cat /sys/firmware/devicetree/base/model | grep -q "Linksys MR8300"; then
+echo "MR9000"
+led=/sys/class/leds/green\:panel
+fi
+
 if cat /sys/firmware/devicetree/base/model | grep -q "COMFAST CF-EW72"; then
 echo "EW72"
 led=/sys/class/leds/cf-ew72\:blue\:wlan
