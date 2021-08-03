@@ -103,6 +103,15 @@ vfile="openwrt-ax3600-sysupgrade.version.txt"
 docheck=1
 fi
 
+if cat /sys/firmware/devicetree/base/model |grep -q "Linksys E8450"; then
+echo "Getting Linksys E8450 (or Belkin RT3200) firmware"
+filedir="https://www.dropbox.com/s/d80goyl79ykdxkp/"
+file="openwrt-mediatek-mt7622-linksys_e8450-ubi-squashfs-sysupgrade.itb"
+vfiledir="https://www.dropbox.com/s/cjgp2bpcoq6vk9a/"
+vfile="openwrt-rt3200-sysupgrade.version.txt"
+docheck=1
+fi
+
 if cat /sys/firmware/devicetree/base/model |grep -q "Linksys MR8300"; then # MR8300 is used for MR9000 device, EA8300 is used for MR8300 device
 echo "Getting Linksys MR9000 firmware"
 filedir="https://www.dropbox.com/s/n4668an40tf4hvc/"
