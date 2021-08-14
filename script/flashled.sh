@@ -59,6 +59,11 @@ echo "Redmi"
 led=/sys/class/leds/white\:status
 fi
 
+if cat /sys/firmware/devicetree/base/model | grep -q "Linksys E8450"; then
+echo "Belkin RT3200 or Linksys E8450"
+led=/sys/class/leds/inet\:blue
+fi
+
 if cat /sys/firmware/devicetree/base/model | grep -q "WRTQ-329ACN"; then
 echo "Luma"
 led="none"
