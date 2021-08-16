@@ -92,6 +92,12 @@ if /root/script/model.sh |grep -q "Xiaomi Redmi Router AC2100"; then
  uci set network.d_lan2.macaddr="00:${batethmac}"
  uci set network.d_lan3.macaddr="00:${batethmac}"
 fi
+if /root/script/model.sh |grep -q "Linksys E8450"; then
+ batethmac=`ifconfig | grep HW | grep lan3 |cut -d ":" -f 3-|sed 's% %%g'`
+ echo "setting eth backhaul macs for Linksys E8450 or Belkin RT3200"
+ uci set network.bat_eth1.macaddr="00:${batethmac}"
+ uci set network.bat_eth2.macaddr="00:${batethmac}"
+fi
 
 echo "setting hostname"
 myipshort=`echo $myip | cut -f 4 -d . `
