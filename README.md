@@ -35,7 +35,7 @@ cd haasmesh
 git pull
 cd ..
 haasmesh/script/setupnodebuild.sh rt3200
-cat etc/config/diffconfig_rt3200 >> .config #Append changes to bottom of .config
+cat haasmesh/etc/config/diffconfig_rt3200 >> .config #Append changes to bottom of .config
 make defconfig #Apply changes
 date > files/etc/config/sysupgrade.version.txt
 make -j6
