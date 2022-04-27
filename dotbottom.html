@@ -21,6 +21,7 @@ for (x in obj2.vis2) {
         rese=res[i].split(" = ")
         if (haasdebug) console.log("rese[0]: "+rese[0])
         if (haasdebug) console.log("rese[1]: "+rese[1])
+        if (rese[1]==undefined) continue
         rese1split=rese[1].split(": ")
         if (rese1split==undefined) continue
         chan=rese1split[2]
